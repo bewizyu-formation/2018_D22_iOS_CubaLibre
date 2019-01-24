@@ -99,6 +99,8 @@
 		1C2F4B6621F89FB100D4B9FC /* Familink */ = {
 			isa = PBXGroup;
 			children = (
+				BC8D5C5B21F9D44800A20B93 /* Xibs */,
+				BC8D5C7221FA1C3B00A20B93 /* ViewControllers */,
 				1C2F4B6721F89FB100D4B9FC /* AppDelegate.swift */,
 				1C2F4B6921F89FB100D4B9FC /* ViewController.swift */,
 				1C2F4B6B21F89FB100D4B9FC /* Main.storyboard */,
@@ -126,6 +128,20 @@
 				1C2F4B8C21F89FB200D4B9FC /* Info.plist */,
 			);
 			path = FamilinkUITests;
+			sourceTree = "<group>";
+		};
+		BC8D5C5B21F9D44800A20B93 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		BC8D5C7221FA1C3B00A20B93 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
