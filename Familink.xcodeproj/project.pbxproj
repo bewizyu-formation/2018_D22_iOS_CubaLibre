@@ -15,6 +15,7 @@
 		1C2F4B7521F89FB200D4B9FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C2F4B7321F89FB200D4B9FC /* LaunchScreen.storyboard */; };
 		1C2F4B8021F89FB200D4B9FC /* FamilinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F4B7F21F89FB200D4B9FC /* FamilinkTests.swift */; };
 		1C2F4B8B21F89FB200D4B9FC /* FamilinkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F4B8A21F89FB200D4B9FC /* FamilinkUITests.swift */; };
+		1C6AA2F921F9EDA70036C997 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6AA2F821F9EDA70036C997 /* APIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		1C2F4B8621F89FB200D4B9FC /* FamilinkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FamilinkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C2F4B8A21F89FB200D4B9FC /* FamilinkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilinkUITests.swift; sourceTree = "<group>"; };
 		1C2F4B8C21F89FB200D4B9FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C6AA2F821F9EDA70036C997 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		1C2F4B6621F89FB100D4B9FC /* Familink */ = {
 			isa = PBXGroup;
 			children = (
+				1C6AA2F721F9ED940036C997 /* API */,
 				1C2F4B6721F89FB100D4B9FC /* AppDelegate.swift */,
 				1C2F4B6921F89FB100D4B9FC /* ViewController.swift */,
 				1C2F4B6B21F89FB100D4B9FC /* Main.storyboard */,
@@ -126,6 +129,14 @@
 				1C2F4B8C21F89FB200D4B9FC /* Info.plist */,
 			);
 			path = FamilinkUITests;
+			sourceTree = "<group>";
+		};
+		1C6AA2F721F9ED940036C997 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1C6AA2F821F9EDA70036C997 /* APIClient.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,6 +294,7 @@
 				1C2F4B6A21F89FB100D4B9FC /* ViewController.swift in Sources */,
 				1C2F4B7021F89FB100D4B9FC /* Familink.xcdatamodeld in Sources */,
 				1C2F4B6821F89FB100D4B9FC /* AppDelegate.swift in Sources */,
+				1C6AA2F921F9EDA70036C997 /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

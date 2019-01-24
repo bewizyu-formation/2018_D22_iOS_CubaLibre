@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,13 +13,89 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Familink" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="login" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gcJ-BG-Yfn">
+                                <rect key="frame" x="16" y="70" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v32-3N-RG2">
+                                <rect key="frame" x="16" y="124" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drS-9O-yiB">
+                                <rect key="frame" x="164" y="186" width="46" height="30"/>
+                                <state key="normal" title="Log in"/>
+                                <connections>
+                                    <action selector="onTapButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HRq-wx-IqS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9s-GB-DTY">
+                                <rect key="frame" x="164" y="232" width="46" height="30"/>
+                                <state key="normal" title="Liste"/>
+                                <connections>
+                                    <action selector="onGetListeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RT5-W2-bLk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Di-CN-89d">
+                                <rect key="frame" x="164" y="278" width="46" height="30"/>
+                                <state key="normal" title="Ajout"/>
+                                <connections>
+                                    <action selector="onAddButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mtu-U3-QuS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWl-OQ-Wof">
+                                <rect key="frame" x="164" y="324" width="46" height="30"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="onDeleteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gfi-6k-a8x"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGI-AQ-k7P">
+                                <rect key="frame" x="164" y="370" width="51" height="30"/>
+                                <state key="normal" title="Update"/>
+                                <connections>
+                                    <action selector="onUpdateButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xfu-id-kmS"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="v32-3N-RG2" secondAttribute="trailing" constant="16" id="1Wd-yj-rFi"/>
+                            <constraint firstItem="1Di-CN-89d" firstAttribute="top" secondItem="A9s-GB-DTY" secondAttribute="bottom" constant="16" id="2Gn-46-pd8"/>
+                            <constraint firstItem="gcJ-BG-Yfn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="3Vs-4Z-tsx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="A9s-GB-DTY" secondAttribute="trailing" constant="165" id="6lZ-xb-dNf"/>
+                            <constraint firstItem="v32-3N-RG2" firstAttribute="top" secondItem="gcJ-BG-Yfn" secondAttribute="bottom" constant="24" id="7ar-eo-Umz"/>
+                            <constraint firstItem="drS-9O-yiB" firstAttribute="top" secondItem="v32-3N-RG2" secondAttribute="bottom" constant="32" id="AtD-66-oHf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gcJ-BG-Yfn" secondAttribute="trailing" constant="16" id="Gis-mK-MwT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1Di-CN-89d" secondAttribute="trailing" constant="165" id="Uqq-k3-gVu"/>
+                            <constraint firstItem="A9s-GB-DTY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="164" id="ZYA-Ed-HL3"/>
+                            <constraint firstItem="GGI-AQ-k7P" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="164" id="ZlH-QP-ZRa"/>
+                            <constraint firstItem="gcJ-BG-Yfn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ZoX-kD-kis"/>
+                            <constraint firstItem="A9s-GB-DTY" firstAttribute="top" secondItem="drS-9O-yiB" secondAttribute="bottom" constant="16" id="aU4-01-hfL"/>
+                            <constraint firstItem="1Di-CN-89d" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="164" id="c8l-PF-mRL"/>
+                            <constraint firstItem="v32-3N-RG2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="chr-HZ-ayZ"/>
+                            <constraint firstItem="bWl-OQ-Wof" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="164" id="dGz-Ku-tQb"/>
+                            <constraint firstItem="drS-9O-yiB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="164" id="e3z-Ve-UfM"/>
+                            <constraint firstItem="GGI-AQ-k7P" firstAttribute="top" secondItem="bWl-OQ-Wof" secondAttribute="bottom" constant="16" id="g3D-4d-hTp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="drS-9O-yiB" secondAttribute="trailing" constant="165" id="h67-go-xV9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bWl-OQ-Wof" secondAttribute="trailing" constant="165" id="hcg-3e-vqd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GGI-AQ-k7P" secondAttribute="trailing" constant="160" id="nM6-5I-xfF"/>
+                            <constraint firstItem="bWl-OQ-Wof" firstAttribute="top" secondItem="1Di-CN-89d" secondAttribute="bottom" constant="16" id="yfV-Ey-pdl"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="login" destination="gcJ-BG-Yfn" id="yr1-xN-ML0"/>
+                        <outlet property="password" destination="v32-3N-RG2" id="mbP-eR-fO5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
