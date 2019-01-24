@@ -92,6 +92,47 @@ class ViewController: UIViewController {
         }) { (error) in
             print(error)
         }
+    }
+    
+    
+    @IBAction func onAddUserButton(_ sender: Any) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let context = appDelegate.persistentContainer.viewContext
         
+        let u = User(context: context)
+        u.phone = self.login.text ?? ""
+        u.firstName = "Jean-Claude"
+        u.lastName = "Couleur"
+        u.email = "jean-claude.couleur@gmail.com"
+        u.profile = "FAMILLE"
+        
+        APIClient.instance.addUser(user: u, password: self.password.text ?? "0000", onSuccess: { (success) in
+            print(success)
+        }) { (error) in
+            print(error)
+        }
+    }
+    
+    
+    @IBAction func onUpdateUserButton(_ sender: Any) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let u = User(context: context)
+        u.phone = self.login.text ?? ""
+        u.firstName = "Joe"
+        u.lastName = "Pentacourt"
+        u.email = "joe.pentacourt@gmail.com"
+        u.profile = "FAMILLE"
+        
+        APIClient.instance.updateUser(token: self.token, user: u, onSuccess: { (success) in
+            print(success)
+        }) { (error) in
+            print(error)
+        }
     }
 }

@@ -65,6 +65,20 @@
                                     <action selector="onUpdateButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xfu-id-kmS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpk-Lz-glf">
+                                <rect key="frame" x="152" y="416" width="70" height="30"/>
+                                <state key="normal" title="Ajout user"/>
+                                <connections>
+                                    <action selector="onAddUserButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UAP-2o-gXz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="elL-qf-BEm">
+                                <rect key="frame" x="146" y="462" width="87" height="30"/>
+                                <state key="normal" title="Update User"/>
+                                <connections>
+                                    <action selector="onUpdateUserButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lap-PZ-4df"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -72,9 +86,13 @@
                             <constraint firstItem="1Di-CN-89d" firstAttribute="top" secondItem="A9s-GB-DTY" secondAttribute="bottom" constant="16" id="2Gn-46-pd8"/>
                             <constraint firstItem="gcJ-BG-Yfn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="3Vs-4Z-tsx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="A9s-GB-DTY" secondAttribute="trailing" constant="165" id="6lZ-xb-dNf"/>
+                            <constraint firstItem="rpk-Lz-glf" firstAttribute="top" secondItem="GGI-AQ-k7P" secondAttribute="bottom" constant="16" id="7E4-ze-XeI"/>
                             <constraint firstItem="v32-3N-RG2" firstAttribute="top" secondItem="gcJ-BG-Yfn" secondAttribute="bottom" constant="24" id="7ar-eo-Umz"/>
                             <constraint firstItem="drS-9O-yiB" firstAttribute="top" secondItem="v32-3N-RG2" secondAttribute="bottom" constant="32" id="AtD-66-oHf"/>
+                            <constraint firstItem="elL-qf-BEm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="146" id="DJA-8A-g3i"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gcJ-BG-Yfn" secondAttribute="trailing" constant="16" id="Gis-mK-MwT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rpk-Lz-glf" secondAttribute="trailing" constant="153" id="SDJ-MD-qdH"/>
+                            <constraint firstItem="elL-qf-BEm" firstAttribute="top" secondItem="rpk-Lz-glf" secondAttribute="bottom" constant="16" id="Ta3-RO-rhg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1Di-CN-89d" secondAttribute="trailing" constant="165" id="Uqq-k3-gVu"/>
                             <constraint firstItem="A9s-GB-DTY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="164" id="ZYA-Ed-HL3"/>
                             <constraint firstItem="GGI-AQ-k7P" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="164" id="ZlH-QP-ZRa"/>
@@ -85,8 +103,10 @@
                             <constraint firstItem="bWl-OQ-Wof" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="164" id="dGz-Ku-tQb"/>
                             <constraint firstItem="drS-9O-yiB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="164" id="e3z-Ve-UfM"/>
                             <constraint firstItem="GGI-AQ-k7P" firstAttribute="top" secondItem="bWl-OQ-Wof" secondAttribute="bottom" constant="16" id="g3D-4d-hTp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="elL-qf-BEm" secondAttribute="trailing" constant="142" id="ghs-Ai-Imh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="drS-9O-yiB" secondAttribute="trailing" constant="165" id="h67-go-xV9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bWl-OQ-Wof" secondAttribute="trailing" constant="165" id="hcg-3e-vqd"/>
+                            <constraint firstItem="rpk-Lz-glf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="152" id="jHr-we-O9t"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GGI-AQ-k7P" secondAttribute="trailing" constant="160" id="nM6-5I-xfF"/>
                             <constraint firstItem="bWl-OQ-Wof" firstAttribute="top" secondItem="1Di-CN-89d" secondAttribute="bottom" constant="16" id="yfV-Ey-pdl"/>
                         </constraints>

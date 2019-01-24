@@ -14,7 +14,8 @@ class APIClient {
     static let instance = APIClient()
     private let BASE_URL = "https://familink-api.cleverapps.io/"
     private let LOGIN_URI = "public/login/"
-    private let ADD_USER_URI = "/public/sign-in/"
+    private let ADD_USER_URI = "public/sign-in/"
+    private let UPDATE_USER = "secured/users"
     private let CONTACT_URI = "secured/users/contacts/"
     private let TOKEN = "token"
     private let PHONE = "phone"
@@ -172,11 +173,38 @@ class APIClient {
         return task
     }
     
-    func addUser(token : String, user : User, password : String, onSuccess: @escaping (String) -> (), onError: @escaping (String) -> ()) -> URLSessionTask {
+    func addUser(user : User, password : String, onSuccess: @escaping (String) -> (), onError: @escaping (String) -> ()) -> URLSessionTask {
         let jsonData = createJsonDataFromUser(userToParseInJson: user, password: password)
         
-        var request = URLRequest(url: URL(string: "\(BASE_URL)\(CONTACT_URI)\(ADD_USER_URI)")! )
+        var request = URLRequest(url: URL(string: "\(BASE_URL)\(ADD_USER_URI)")! )
         request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                if(httpResponse.statusCode != 200){
+                    onError(self.getStatusError(statusCode: httpResponse.statusCode))
+                } else {
+                    onSuccess("User ajouté")
+                }
+            }
+        }
+        task.resume()
+        
+        return task
+    }
+    
+    func updateUser(token : String, user : User, onSuccess: @escaping (String) -> (), onError: @escaping (String) -> ()) -> URLSessionTask {
+        let json : [String: Any] = [self.FIRSTNAME : user.firstName ?? "",
+                                    self.LASTNAME : user.lastName ?? "",
+                                    self.EMAIL : user.email ?? "",
+                                    self.PROFILE : user.profile]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        var request = URLRequest(url: URL(string: "\(BASE_URL)\(UPDATE_USER)")! )
+        request.httpMethod = "PUT"
         request.httpBody = jsonData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
@@ -186,7 +214,7 @@ class APIClient {
                 if(httpResponse.statusCode != 200){
                     onError(self.getStatusError(statusCode: httpResponse.statusCode))
                 } else {
-                    onSuccess("User ajouté")
+                    onSuccess("User modifié")
                 }
             }
         }
