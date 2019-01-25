@@ -14,7 +14,7 @@ extension Notification.Name {
 }
 
 class ViewController: UIViewController {
-
+    private var token : String = ""
 
     @IBOutlet weak var LoginContainerView: UIView!
     @IBOutlet weak var ContactListContainerView: UIView!
@@ -53,4 +53,3 @@ class ViewController: UIViewController {
         toggleUINavigation()
     }
 }
-

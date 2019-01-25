@@ -15,6 +15,7 @@
 		1C2F4B7521F89FB200D4B9FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C2F4B7321F89FB200D4B9FC /* LaunchScreen.storyboard */; };
 		1C2F4B8021F89FB200D4B9FC /* FamilinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F4B7F21F89FB200D4B9FC /* FamilinkTests.swift */; };
 		1C2F4B8B21F89FB200D4B9FC /* FamilinkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F4B8A21F89FB200D4B9FC /* FamilinkUITests.swift */; };
+		1C6AA2F921F9EDA70036C997 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6AA2F821F9EDA70036C997 /* APIClient.swift */; };
 		BC733AE021FB0B3F00BC110F /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733ADE21FB0B3F00BC110F /* ForgottenPasswordViewController.swift */; };
 		BC733AE121FB0B3F00BC110F /* ForgottenPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC733ADF21FB0B3F00BC110F /* ForgottenPasswordViewController.xib */; };
 		BC733AE321FB0C4300BC110F /* ContactListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733AE221FB0C4300BC110F /* ContactListTableViewController.swift */; };
@@ -67,6 +68,7 @@
 		1C2F4B8621F89FB200D4B9FC /* FamilinkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FamilinkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C2F4B8A21F89FB200D4B9FC /* FamilinkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilinkUITests.swift; sourceTree = "<group>"; };
 		1C2F4B8C21F89FB200D4B9FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C6AA2F821F9EDA70036C997 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		BC733ADE21FB0B3F00BC110F /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		BC733ADF21FB0B3F00BC110F /* ForgottenPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgottenPasswordViewController.xib; sourceTree = "<group>"; };
 		BC733AE221FB0C4300BC110F /* ContactListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListTableViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		1C2F4B6621F89FB100D4B9FC /* Familink */ = {
 			isa = PBXGroup;
 			children = (
+				1C6AA2F721F9ED940036C997 /* API */,
 				BC8D5C5B21F9D44800A20B93 /* Xibs */,
 				BC8D5C7221FA1C3B00A20B93 /* ViewControllers */,
 				1C2F4B6721F89FB100D4B9FC /* AppDelegate.swift */,
@@ -165,6 +168,14 @@
 			);
 			path = FamilinkUITests;
 			sourceTree = "<group>";
+		};
+		1C6AA2F721F9ED940036C997 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1C6AA2F821F9EDA70036C997 /* APIClient.swift */,
+			);
+			path = API;
+      sourceTree = "<group>";
 		};
 		BC8D5C5B21F9D44800A20B93 /* Xibs */ = {
 			isa = PBXGroup;
@@ -370,6 +381,7 @@
 				BC8D5C7521FA1D3400A20B93 /* SignUpViewController.swift in Sources */,
 				BC733AE621FB279A00BC110F /* UserDetailsViewController.swift in Sources */,
 				1C2F4B6821F89FB100D4B9FC /* AppDelegate.swift in Sources */,
+				1C6AA2F921F9EDA70036C997 /* APIClient.swift in Sources */,
 				BC733AF621FB2C8F00BC110F /* EditContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
