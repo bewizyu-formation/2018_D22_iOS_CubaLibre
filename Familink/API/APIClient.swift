@@ -44,17 +44,17 @@ class APIClient {
 
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode != 200){
-                    onError(self.getStatusError(statusCode: httpResponse.statusCode))
-                } else {
+                if(httpResponse.statusCode == 200){
                     if let dataResponse = data {
                         if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [String: String] {
                             let token = jsonResponse["token"] ?? ""
                             onSuccess(token)
                         }
                     } else {
-                        onError("Erreur")
+                        onError("Erreur inconnue")
                     }
+                } else {
+                    onError(self.getError(data: data))
                 }
             }
         }
@@ -70,9 +70,7 @@ class APIClient {
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode != 200){
-                    onError(self.getStatusError(statusCode: httpResponse.statusCode))
-                } else {
+                if(httpResponse.statusCode == 200){
                     if let dataResponse = data {
                         if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [Any] {
                             var contactsToReturn = [Contact]()
@@ -96,8 +94,10 @@ class APIClient {
                             onSuccess(contactsToReturn)
                         }
                     } else {
-                        onError("Erreur")
+                        onError("Erreur inconnue")
                     }
+                } else {
+                    onError(self.getError(data: data))
                 }
             }
         }
@@ -117,10 +117,10 @@ class APIClient {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode != 200){
-                    onError(self.getStatusError(statusCode: httpResponse.statusCode))
-                } else {
+                if(httpResponse.statusCode == 200){
                     onSuccess("Contact ajouté")
+                } else {
+                    onError(self.getError(data: data))
                 }
             }
         }
@@ -132,8 +132,6 @@ class APIClient {
     func updateContact(token : String, contact : Contact, onSuccess: @escaping (String) -> (), onError: @escaping (String) -> ()) -> URLSessionTask {
         let jsonData = createJsonDataFromContact(contactToParseInJson : contact)
         
-        print(contact)
-        
         var request = URLRequest(url: URL(string: "\(BASE_URL)\(CONTACT_URI)\(contact.contactId!)")! )
         request.httpMethod = "PUT"
         request.httpBody = jsonData
@@ -142,10 +140,10 @@ class APIClient {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode != 204){
-                    onError(self.getStatusError(statusCode: httpResponse.statusCode))
-                } else {
+                if(httpResponse.statusCode == 204){
                     onSuccess("Contact modifié")
+                } else {
+                    onError(self.getError(data: data))
                 }
             }
         }
@@ -162,10 +160,10 @@ class APIClient {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode != 204){
-                    onError(self.getStatusError(statusCode: httpResponse.statusCode))
-                } else {
+                if(httpResponse.statusCode == 204){
                     onSuccess("Contact supprimé")
+                } else {
+                    onError(self.getError(data: data))
                 }
             }
         }
@@ -184,10 +182,10 @@ class APIClient {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode != 200){
-                    onError(self.getStatusError(statusCode: httpResponse.statusCode))
-                } else {
+                if(httpResponse.statusCode == 200){
                     onSuccess("User ajouté")
+                } else {
+                    onError(self.getError(data: data))
                 }
             }
         }
@@ -212,10 +210,10 @@ class APIClient {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode != 200){
-                    onError(self.getStatusError(statusCode: httpResponse.statusCode))
-                } else {
+                if(httpResponse.statusCode == 200){
                     onSuccess("User modifié")
+                } else {
+                    onError(self.getError(data: data))
                 }
             }
         }
@@ -232,9 +230,7 @@ class APIClient {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode != 200){
-                    onError(self.getStatusError(statusCode: httpResponse.statusCode))
-                } else {
+                if(httpResponse.statusCode == 200){
                     if let dataResponse = data {
                         if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [String: String] {
                             let user = User(context: self.getContext()!)
@@ -246,8 +242,10 @@ class APIClient {
                             onSuccess(user)
                         }
                     } else {
-                        onError("Erreur")
+                        onError("Erreur inconnue")
                     }
+                } else {
+                    onError(self.getError(data: data))
                 }
             }
         }
@@ -284,15 +282,14 @@ class APIClient {
         return jsonData
     }
     
-    func getStatusError(statusCode : Int) -> String {
-        switch statusCode {
-        case 400:
-            return "Identifiant invalide"
-        case 401:
-            return "Session expirée"
-        default:
-            return "Serveur inaccessible"
+    func getError(data : Data?) -> String {
+        if let dataResponse = data {
+            if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [String: String] {
+                return jsonResponse["message"] ?? ""
+            }
+            return "Erreur inconnue"
         }
+        return "Erreur inconnue"
     }
     
     func getContext() -> NSManagedObjectContext? {

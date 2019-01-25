@@ -62,7 +62,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func onDeleteButton(_ sender: Any) {
-        APIClient.instance.deleteContact(token: self.token, contactId: "5c49ca6565ecd90866845a03", onSuccess: { (success) in
+        APIClient.instance.deleteContact(token: self.token, contactId: "5c4adb3065ecd90866845abb", onSuccess: { (success) in
             print(success)
         }) { (error) in
             print(error)
