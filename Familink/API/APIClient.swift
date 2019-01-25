@@ -15,7 +15,8 @@ class APIClient {
     private let BASE_URL = "https://familink-api.cleverapps.io/"
     private let LOGIN_URI = "public/login/"
     private let ADD_USER_URI = "public/sign-in/"
-    private let UPDATE_USER = "secured/users"
+    private let UPDATE_USER_URI = "secured/users"
+    private let CURRENT_USER_URI = "secured/users/current"
     private let CONTACT_URI = "secured/users/contacts/"
     private let TOKEN = "token"
     private let PHONE = "phone"
@@ -203,7 +204,7 @@ class APIClient {
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
-        var request = URLRequest(url: URL(string: "\(BASE_URL)\(UPDATE_USER)")! )
+        var request = URLRequest(url: URL(string: "\(BASE_URL)\(UPDATE_USER_URI)")! )
         request.httpMethod = "PUT"
         request.httpBody = jsonData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -215,6 +216,38 @@ class APIClient {
                     onError(self.getStatusError(statusCode: httpResponse.statusCode))
                 } else {
                     onSuccess("User modifié")
+                }
+            }
+        }
+        task.resume()
+        
+        return task
+    }
+    
+    func getUser(token : String, onSuccess: @escaping (User) -> (), onError: @escaping (String) -> ()) -> URLSessionTask {
+        var request = URLRequest(url: URL(string: "\(BASE_URL)\(CURRENT_USER_URI)")! )
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                if(httpResponse.statusCode != 200){
+                    onError(self.getStatusError(statusCode: httpResponse.statusCode))
+                } else {
+                    if let dataResponse = data {
+                        if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [String: String] {
+                            let user = User(context: self.getContext()!)
+                            user.phone = jsonResponse[self.PHONE] ?? ""
+                            user.firstName = jsonResponse[self.FIRSTNAME] ?? ""
+                            user.lastName = jsonResponse[self.LASTNAME] ?? ""
+                            user.email = jsonResponse[self.EMAIL] ?? ""
+                            user.profile = jsonResponse[self.PROFILE] ?? ""
+                            onSuccess(user)
+                        }
+                    } else {
+                        onError("Erreur")
+                    }
                 }
             }
         }

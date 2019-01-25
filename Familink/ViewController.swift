@@ -43,18 +43,18 @@ class ViewController: UIViewController {
         let context = appDelegate.persistentContainer.viewContext
         
         let c = Contact(context: context)
-        c.firstName = "aaaaaaa"
-        c.lastName = "jhghg"
-        c.phone = "0618948899"
-        c.email = "gfgf@hf"
-        c.gravatar = "http://aaaaa"
+        c.firstName = "uuuuuu"
+        c.lastName = "jhguuuuuuuuhg"
+        c.phone = "0618788899"
+        c.email = "uuuuuuuf@hf"
+        c.gravatar = "http://uuuuuuuuu"
         c.profile = "FAMILLE"
         c.isEmergencyUser = true
         c.isFamilinkUser = false
         
         
         APIClient.instance.addContact(token: self.token, contact: c, onSuccess: { (success) in
-            print(success)
+            print("Message : \(success)")
         }) { (error) in
             print(error)
         }
@@ -133,6 +133,15 @@ class ViewController: UIViewController {
             print(success)
         }) { (error) in
             print(error)
+        }
+    }
+    
+    
+    @IBAction func onGetUserButton(_ sender: Any) {
+        APIClient.instance.getUser(token: self.token, onSuccess: { (user) in
+            print(user)
+        }) { (erreur) in
+            print(erreur)
         }
     }
 }
