@@ -12,7 +12,7 @@ class LoginUIViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidUserDisconnect(_:)), name: .didUserDisconnect, object: nil)
         // Do any additional setup after loading the view.
     }
     @IBAction func SignUpButton(_ sender: Any) {
@@ -31,6 +31,9 @@ class LoginUIViewController: UIViewController {
         NotificationCenter.default.post(name: .didUserConnect, object: nil)
     }
     
+    @objc func onDidUserDisconnect(_ notification:Notification) {
+        self.navigationController?.popToRootViewController(animated: false)
+    }
     /*
     // MARK: - Navigation
 

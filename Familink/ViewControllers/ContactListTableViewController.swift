@@ -9,11 +9,17 @@
 import UIKit
 
 class ContactListTableViewController: UITableViewController {
+    
+    var contacts = [String]()
 
     @IBOutlet weak var DisconnectButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        contacts.append("pop:p")
+        
+        tableView.register(UINib(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: "ContactTableViewCell")
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -39,14 +45,31 @@ class ContactListTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return contacts.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell", for: indexPath) as! ContactTableViewCell
+        
+        // Configure the cell...
+        cell.contactLabelTitle.text = contacts[indexPath.row]
+        
+        return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = ContactDetailsViewController(nibName:nil, bundle: nil)
+        vc.contact = contacts[indexPath.row]
+
+        
+        self.show(vc, sender: self)
+    }
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
