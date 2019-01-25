@@ -10,6 +10,7 @@ import UIKit
 
 class ContactListTableViewController: UITableViewController {
 
+    @IBOutlet weak var DisconnectButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +21,20 @@ class ContactListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    
+    @IBAction func onUserButtonPressed(_ sender: Any) {
+        let userDetailsController = UserDetailsViewController(nibName:nil, bundle: nil)
+        self.navigationController?.pushViewController(userDetailsController, animated: true)
+    }
+    
+    @IBAction func addContactButtonPressed(_ sender: Any) {
+        let addContactController = AddContactViewController(nibName:nil, bundle: nil)
+        self.navigationController?.pushViewController(addContactController, animated: true)
+    }
+    
+    @IBAction func onDisconnectButtonPress(_ sender: Any) {
+        NotificationCenter.default.post(name: .didUserDisconnect, object: nil)
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

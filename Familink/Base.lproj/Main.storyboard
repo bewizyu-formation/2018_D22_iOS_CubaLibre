@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Contact List-->
         <scene sceneID="aEt-rG-UWh">
             <objects>
-                <tableViewController id="pbF-Pb-OY3" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ContactListTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pbF-Pb-OY3" customClass="ContactListTableViewController" customModule="Familink" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fcU-Wx-bOJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,6 +25,13 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mty-qo-pW0" id="X92-lM-VQE">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOk-SN-XM6">
+                                            <rect key="frame" x="154" y="6" width="40" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Detail"/>
+                                        </button>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -33,7 +40,28 @@
                             <outlet property="delegate" destination="pbF-Pb-OY3" id="lah-L6-FeO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="lv9-3h-Vjc"/>
+                    <navigationItem key="navigationItem" title="Contact List" id="lv9-3h-Vjc">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Déconnexion" id="L5K-dJ-BSC">
+                                <connections>
+                                    <action selector="onDisconnectButtonPress:" destination="pbF-Pb-OY3" id="YDD-A9-iQb"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="User" id="Hi5-pi-m89">
+                                <connections>
+                                    <action selector="onUserButtonPressed:" destination="pbF-Pb-OY3" id="Opg-hr-A3w"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Ajout" id="OgC-Be-Dae">
+                                <connections>
+                                    <action selector="addContactButtonPressed:" destination="pbF-Pb-OY3" id="YHh-yQ-fSO"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="DisconnectButton" destination="L5K-dJ-BSC" id="Ogs-ZE-JBX"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gjy-Xr-rHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

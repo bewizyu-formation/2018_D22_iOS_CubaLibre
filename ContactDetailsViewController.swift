@@ -1,23 +1,23 @@
 //
-//  SignUpViewController.swift
+//  ContactDetailsViewController.swift
 //  Familink
 //
-//  Created by formation 1 on 24/01/2019.
+//  Created by formation 1 on 25/01/2019.
 //  Copyright © 2019 CubaLibre. All rights reserved.
 //
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class ContactDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
-
-    @IBAction func SignUpAndConnect(_ sender: Any) {
-        NotificationCenter.default.post(name: .didUserConnect, object: nil)
+    
+    
+    @IBAction func onEditButtonPressed(_ sender: Any) {
+        let editContactController = EditContactViewController(nibName:nil, bundle: nil)
+        self.navigationController?.pushViewController(editContactController, animated: true)
     }
     
     /*

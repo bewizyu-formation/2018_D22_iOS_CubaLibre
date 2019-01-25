@@ -18,6 +18,16 @@
 		BC733AE021FB0B3F00BC110F /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733ADE21FB0B3F00BC110F /* ForgottenPasswordViewController.swift */; };
 		BC733AE121FB0B3F00BC110F /* ForgottenPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC733ADF21FB0B3F00BC110F /* ForgottenPasswordViewController.xib */; };
 		BC733AE321FB0C4300BC110F /* ContactListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733AE221FB0C4300BC110F /* ContactListTableViewController.swift */; };
+		BC733AE621FB279A00BC110F /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733AE421FB279A00BC110F /* UserDetailsViewController.swift */; };
+		BC733AE721FB279A00BC110F /* UserDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC733AE521FB279A00BC110F /* UserDetailsViewController.xib */; };
+		BC733AEA21FB280800BC110F /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733AE821FB280800BC110F /* AddContactViewController.swift */; };
+		BC733AEB21FB280800BC110F /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC733AE921FB280800BC110F /* AddContactViewController.xib */; };
+		BC733AF221FB285700BC110F /* EditUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733AF021FB285700BC110F /* EditUserViewController.swift */; };
+		BC733AF321FB285700BC110F /* EditUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC733AF121FB285700BC110F /* EditUserViewController.xib */; };
+		BC733AF621FB2C8F00BC110F /* EditContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733AF421FB2C8F00BC110F /* EditContactViewController.swift */; };
+		BC733AF721FB2C8F00BC110F /* EditContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC733AF521FB2C8F00BC110F /* EditContactViewController.xib */; };
+		BC733AFC21FB2D0D00BC110F /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733AFA21FB2D0D00BC110F /* ContactDetailsViewController.swift */; };
+		BC733AFD21FB2D0D00BC110F /* ContactDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC733AFB21FB2D0D00BC110F /* ContactDetailsViewController.xib */; };
 		BC8D5C7521FA1D3400A20B93 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8D5C7321FA1D3400A20B93 /* SignUpViewController.swift */; };
 		BC8D5C7621FA1D3400A20B93 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC8D5C7421FA1D3400A20B93 /* SignUpViewController.xib */; };
 		BC8D5C7A21FA202200A20B93 /* LoginUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8D5C7921FA202200A20B93 /* LoginUIViewController.swift */; };
@@ -58,6 +68,16 @@
 		BC733ADE21FB0B3F00BC110F /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		BC733ADF21FB0B3F00BC110F /* ForgottenPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgottenPasswordViewController.xib; sourceTree = "<group>"; };
 		BC733AE221FB0C4300BC110F /* ContactListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListTableViewController.swift; sourceTree = "<group>"; };
+		BC733AE421FB279A00BC110F /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
+		BC733AE521FB279A00BC110F /* UserDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDetailsViewController.xib; sourceTree = "<group>"; };
+		BC733AE821FB280800BC110F /* AddContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
+		BC733AE921FB280800BC110F /* AddContactViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddContactViewController.xib; sourceTree = "<group>"; };
+		BC733AF021FB285700BC110F /* EditUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserViewController.swift; sourceTree = "<group>"; };
+		BC733AF121FB285700BC110F /* EditUserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditUserViewController.xib; sourceTree = "<group>"; };
+		BC733AF421FB2C8F00BC110F /* EditContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactViewController.swift; sourceTree = "<group>"; };
+		BC733AF521FB2C8F00BC110F /* EditContactViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditContactViewController.xib; sourceTree = "<group>"; };
+		BC733AFA21FB2D0D00BC110F /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactDetailsViewController.swift; path = ../../ContactDetailsViewController.swift; sourceTree = "<group>"; };
+		BC733AFB21FB2D0D00BC110F /* ContactDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ContactDetailsViewController.xib; path = ../../ContactDetailsViewController.xib; sourceTree = "<group>"; };
 		BC8D5C7321FA1D3400A20B93 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BC8D5C7421FA1D3400A20B93 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		BC8D5C7921FA202200A20B93 /* LoginUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUIViewController.swift; sourceTree = "<group>"; };
@@ -145,8 +165,13 @@
 		BC8D5C5B21F9D44800A20B93 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				BC8D5C7421FA1D3400A20B93 /* SignUpViewController.xib */,
+				BC733AE521FB279A00BC110F /* UserDetailsViewController.xib */,
+				BC733AF121FB285700BC110F /* EditUserViewController.xib */,
+				BC733AFB21FB2D0D00BC110F /* ContactDetailsViewController.xib */,
+				BC733AF521FB2C8F00BC110F /* EditContactViewController.xib */,
+				BC733AE921FB280800BC110F /* AddContactViewController.xib */,
 				BC733ADF21FB0B3F00BC110F /* ForgottenPasswordViewController.xib */,
+				BC8D5C7421FA1D3400A20B93 /* SignUpViewController.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -154,6 +179,11 @@
 		BC8D5C7221FA1C3B00A20B93 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BC733AE421FB279A00BC110F /* UserDetailsViewController.swift */,
+				BC733AF021FB285700BC110F /* EditUserViewController.swift */,
+				BC733AFA21FB2D0D00BC110F /* ContactDetailsViewController.swift */,
+				BC733AF421FB2C8F00BC110F /* EditContactViewController.swift */,
+				BC733AE821FB280800BC110F /* AddContactViewController.swift */,
 				BC733ADE21FB0B3F00BC110F /* ForgottenPasswordViewController.swift */,
 				BC8D5C7321FA1D3400A20B93 /* SignUpViewController.swift */,
 				BC8D5C7921FA202200A20B93 /* LoginUIViewController.swift */,
@@ -267,10 +297,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC733AFD21FB2D0D00BC110F /* ContactDetailsViewController.xib in Resources */,
 				1C2F4B7521F89FB200D4B9FC /* LaunchScreen.storyboard in Resources */,
 				1C2F4B7221F89FB200D4B9FC /* Assets.xcassets in Resources */,
+				BC733AF721FB2C8F00BC110F /* EditContactViewController.xib in Resources */,
+				BC733AE721FB279A00BC110F /* UserDetailsViewController.xib in Resources */,
 				BC8D5C7621FA1D3400A20B93 /* SignUpViewController.xib in Resources */,
+				BC733AEB21FB280800BC110F /* AddContactViewController.xib in Resources */,
 				BC733AE121FB0B3F00BC110F /* ForgottenPasswordViewController.xib in Resources */,
+				BC733AF321FB285700BC110F /* EditUserViewController.xib in Resources */,
 				1C2F4B6D21F89FB100D4B9FC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,11 +353,16 @@
 			files = (
 				BC733AE021FB0B3F00BC110F /* ForgottenPasswordViewController.swift in Sources */,
 				BC8D5C7A21FA202200A20B93 /* LoginUIViewController.swift in Sources */,
+				BC733AFC21FB2D0D00BC110F /* ContactDetailsViewController.swift in Sources */,
 				BC733AE321FB0C4300BC110F /* ContactListTableViewController.swift in Sources */,
+				BC733AEA21FB280800BC110F /* AddContactViewController.swift in Sources */,
+				BC733AF221FB285700BC110F /* EditUserViewController.swift in Sources */,
 				1C2F4B6A21F89FB100D4B9FC /* ViewController.swift in Sources */,
 				1C2F4B7021F89FB100D4B9FC /* Familink.xcdatamodeld in Sources */,
 				BC8D5C7521FA1D3400A20B93 /* SignUpViewController.swift in Sources */,
+				BC733AE621FB279A00BC110F /* UserDetailsViewController.swift in Sources */,
 				1C2F4B6821F89FB100D4B9FC /* AppDelegate.swift in Sources */,
+				BC733AF621FB2C8F00BC110F /* EditContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

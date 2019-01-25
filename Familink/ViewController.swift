@@ -10,6 +10,7 @@ import UIKit
 
 extension Notification.Name {
     static let didUserConnect = Notification.Name("didUserConnect")
+    static let didUserDisconnect = Notification.Name("didUserDisconnect")
 }
 
 class ViewController: UIViewController {
@@ -22,13 +23,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didUserConnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidUserConnect(_:)), name: .didUserConnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidUserDisconnect(_:)), name: .didUserDisconnect, object: nil)
     }
     
-    @objc func onDidReceiveData(_ notification:Notification) {
+    @objc func onDidUserConnect(_ notification:Notification) {
         isConnected = true
         toggleUINavigation()
     }
+    
+    @objc func onDidUserDisconnect(_ notification:Notification) {
+        isConnected = false
+        toggleUINavigation()
+    }
+    
     
     func toggleUINavigation() {
         if (isConnected) {

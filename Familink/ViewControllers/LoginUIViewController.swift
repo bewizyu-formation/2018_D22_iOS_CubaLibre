@@ -25,6 +25,8 @@ class LoginUIViewController: UIViewController {
         self.navigationController?.pushViewController(forgotPasswordController, animated: true)
     }
     
+    @IBAction func userNav(_ sender: Any) {
+    }
     @IBAction func LoginButton(_ sender: Any) {
         NotificationCenter.default.post(name: .didUserConnect, object: nil)
     }
