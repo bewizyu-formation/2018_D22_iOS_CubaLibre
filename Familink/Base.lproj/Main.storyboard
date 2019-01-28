@@ -98,7 +98,7 @@
                                     <color key="titleColor" red="0.72549019607843135" green="0.54117647058823526" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="ForgotPassButton:" destination="pIn-yP-ZYG" eventType="touchUpInside" id="bep-ZL-oBN"/>
+                                    <action selector="onForgotPasswordButtonTap:" destination="pIn-yP-ZYG" eventType="touchUpInside" id="kLh-z7-sNw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k09-Ut-Gxy">
@@ -108,7 +108,7 @@
                                     <color key="titleColor" red="0.72549019607843135" green="0.54117647058823526" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="SignUpButton:" destination="pIn-yP-ZYG" eventType="touchUpInside" id="Vaz-nv-soL"/>
+                                    <action selector="onSignUpButtonTap:" destination="pIn-yP-ZYG" eventType="touchUpInside" id="Acn-ir-Ses"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szS-NA-L76">
@@ -121,7 +121,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="LoginButton:" destination="pIn-yP-ZYG" eventType="touchUpInside" id="l7E-IG-XTx"/>
+                                    <action selector="onLoginButtonTap:" destination="pIn-yP-ZYG" eventType="touchUpInside" id="GJ0-1u-BNs"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mot de passe" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U0i-N0-8p8">
@@ -166,6 +166,8 @@
                     <connections>
                         <outlet property="logInButton" destination="szS-NA-L76" id="3ps-g7-Oqs"/>
                         <outlet property="loginConstraint" destination="vps-bA-MwS" id="hAp-mU-Zmw"/>
+                        <outlet property="loginTextField" destination="JZD-QI-ZIi" id="3oe-6R-qDE"/>
+                        <outlet property="passwordTextField" destination="U0i-N0-8p8" id="4p5-p5-kqh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vaY-m3-4bL" userLabel="First Responder" sceneMemberID="firstResponder"/>
