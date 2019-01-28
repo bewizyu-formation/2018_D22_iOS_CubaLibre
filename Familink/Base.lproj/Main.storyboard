@@ -115,6 +115,7 @@
                                 <rect key="frame" x="127.5" y="339" width="120" height="30"/>
                                 <color key="backgroundColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Tuv-PC-mG6"/>
                                     <constraint firstAttribute="width" constant="120" id="vps-bA-MwS"/>
                                 </constraints>
                                 <state key="normal" title="Se connecter">
@@ -128,13 +129,13 @@
                                 <rect key="frame" x="32" y="267" width="311" height="30"/>
                                 <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Identifiant" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JZD-QI-ZIi">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="N° de téléphone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JZD-QI-ZIi">
                                 <rect key="frame" x="32" y="197" width="311" height="30"/>
                                 <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="tel"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="M4h-Rv-IY7">
                                 <rect key="frame" x="126" y="32" width="110" height="56"/>
@@ -164,10 +165,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="TmA-FY-vRA"/>
                     <connections>
+                        <outlet property="forgotPasswordButton" destination="bTX-9U-i1o" id="eMN-w2-uEP"/>
                         <outlet property="logInButton" destination="szS-NA-L76" id="3ps-g7-Oqs"/>
-                        <outlet property="loginConstraint" destination="vps-bA-MwS" id="hAp-mU-Zmw"/>
+                        <outlet property="loginBottomConstraint" destination="fjz-6k-Kxz" id="U1V-iP-P3P"/>
                         <outlet property="loginTextField" destination="JZD-QI-ZIi" id="3oe-6R-qDE"/>
                         <outlet property="passwordTextField" destination="U0i-N0-8p8" id="4p5-p5-kqh"/>
+                        <outlet property="signUpButton" destination="k09-Ut-Gxy" id="s6j-n8-1rt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vaY-m3-4bL" userLabel="First Responder" sceneMemberID="firstResponder"/>
