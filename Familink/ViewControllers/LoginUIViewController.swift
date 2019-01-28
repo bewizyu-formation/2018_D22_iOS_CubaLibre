@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class LoginUIViewController: UIViewController {
     @IBOutlet weak var loginTextField: UITextField!
@@ -43,7 +44,7 @@ class LoginUIViewController: UIViewController {
         UIView.animate(withDuration: -1, animations: {
             self.view.layoutIfNeeded()
         }) { (_) in
-            APIClient.instance.getToken(login: self.loginTextField.text ?? "", password: self.passwordTextField.text ?? "", onSuccess: { (success) in
+            APIClient.instance.getToken(login: self.loginTextField.text ?? "", password: self.passwordTextField.text ?? "", onSuccess: { (token) in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 2, animations: {
                         self.logInButton.setTitle("Connecté", for: .normal)
@@ -55,6 +56,7 @@ class LoginUIViewController: UIViewController {
                             self.forgotPasswordButton.isHidden = true
                             self.signUpButton.isHidden = true
                             self.view.layoutIfNeeded()
+                            self.saveTokenInCoreData(tokenToSave: token)
                             NotificationCenter.default.post(name: .didUserConnect, object: nil)
                         })
                     })
@@ -73,7 +75,6 @@ class LoginUIViewController: UIViewController {
         }
     }
 
-    
     @objc func onDidUserDisconnect(_ notification:Notification) {
         print("disconnet")
         self.navigationController?.isNavigationBarHidden = true
@@ -109,6 +110,28 @@ class LoginUIViewController: UIViewController {
         self.signUpButton.setTitleColor(.oldRose, for: .normal)
         self.forgotPasswordButton.setTitleColor(.oldRose, for: .normal)
         
+    }
+    
+    func saveTokenInCoreData(tokenToSave : String) {
+        let context = getContext()
+        let fetchRequest: NSFetchRequest<Token> = Token.fetchRequest()
+        if let result = try? context!.fetch(fetchRequest) {
+            for object in result {
+                context!.delete(object)
+            }
+        }
+        
+        let token = Token(context: context!)
+        token.value = tokenToSave
+        
+        try? context?.save()
+    }
+    
+    func getContext() -> NSManagedObjectContext? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        return appDelegate.persistentContainer.viewContext
     }
     
     /*
