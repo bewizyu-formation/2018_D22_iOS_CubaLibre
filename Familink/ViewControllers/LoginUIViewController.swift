@@ -41,11 +41,14 @@ class LoginUIViewController: UIViewController {
     }
     
     @IBAction func onLoginButtonTap(_ sender: Any) {
+        let loader = UIViewController.displaySpinner(onView: self.view)
+        
         UIView.animate(withDuration: -1, animations: {
             self.view.layoutIfNeeded()
         }) { (_) in
             APIClient.instance.getToken(login: self.loginTextField.text ?? "", password: self.passwordTextField.text ?? "", onSuccess: { (token) in
                 DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader)
                     UIView.animate(withDuration: 2, animations: {
                         self.logInButton.setTitle("Connecté", for: .normal)
                         self.logInButton.backgroundColor = .green
@@ -63,6 +66,7 @@ class LoginUIViewController: UIViewController {
                 }
             }) { (error) in
                 DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader)
                     UIView.animate(withDuration: -1, animations: {
                         self.logInButton.setTitle("Réessayer", for: .normal)
                         self.logInButton.backgroundColor = .red
