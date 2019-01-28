@@ -106,6 +106,10 @@ class LoginUIViewController: UIViewController {
         
         self.logInButton.layer.cornerRadius = logInButton.frame.height/2
         self.logInButton.backgroundColor = .oldRose
+        self.logInButton.setTitleColor(.seaShell, for: .normal)
+        self.logInButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        self.logInButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        self.logInButton.layer.shadowOpacity = 1.0
         
         self.signUpButton.setTitleColor(.oldRose, for: .normal)
         self.forgotPasswordButton.setTitleColor(.oldRose, for: .normal)
