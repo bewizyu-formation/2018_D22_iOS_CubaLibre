@@ -101,12 +101,12 @@ class LoginUIViewController: UIViewController {
         self.loginTextField.textColor = .rosyBrown
         self.loginTextField.layer.borderColor = UIColor.rosyBrown.cgColor
         self.loginTextField.layer.borderWidth = 1.0
-        self.loginTextField.layer.cornerRadius = self.loginTextField.frame.height/2
+        //self.loginTextField.layer.cornerRadius = self.loginTextField.frame.height/2
         
         self.passwordTextField.textColor = .rosyBrown
         self.passwordTextField.layer.borderColor = UIColor.rosyBrown.cgColor
         self.passwordTextField.layer.borderWidth = 1.0
-        self.passwordTextField.layer.cornerRadius = self.passwordTextField.frame.height/2
+        //self.passwordTextField.layer.cornerRadius = self.passwordTextField.frame.height/2
         
         self.logInButton.layer.cornerRadius = logInButton.frame.height/2
         self.logInButton.backgroundColor = .oldRose
