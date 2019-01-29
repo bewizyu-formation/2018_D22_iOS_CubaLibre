@@ -16,6 +16,7 @@
 		1C2F4B8021F89FB200D4B9FC /* FamilinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F4B7F21F89FB200D4B9FC /* FamilinkTests.swift */; };
 		1C2F4B8B21F89FB200D4B9FC /* FamilinkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F4B8A21F89FB200D4B9FC /* FamilinkUITests.swift */; };
 		1C6AA2F921F9EDA70036C997 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6AA2F821F9EDA70036C997 /* APIClient.swift */; };
+		1CA2F3E22200938300349D99 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA2F3E12200938300349D99 /* edit.png */; };
 		1CA8927621FF05520087D393 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8927521FF05520087D393 /* Colors.swift */; };
 		1CA8927B21FF41470087D393 /* LoaderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8927A21FF41470087D393 /* LoaderScreen.swift */; };
 		BC49D04622006A1600378D1C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC49D04522006A1500378D1C /* Helper.swift */; };
@@ -75,6 +76,7 @@
 		1C2F4B8A21F89FB200D4B9FC /* FamilinkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilinkUITests.swift; sourceTree = "<group>"; };
 		1C2F4B8C21F89FB200D4B9FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C6AA2F821F9EDA70036C997 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		1CA2F3E12200938300349D99 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		1CA8927521FF05520087D393 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1CA8927A21FF41470087D393 /* LoaderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderScreen.swift; sourceTree = "<group>"; };
 		BC49D04522006A1500378D1C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 		BC8AEB0B21FF030700E9028B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1CA2F3E12200938300349D99 /* edit.png */,
 				BC49D04822006D5C00378D1C /* logout.png */,
 				BC49D04922006D5C00378D1C /* newContact.png */,
 				BC49D04722006D5C00378D1C /* profile.png */,
@@ -359,6 +362,7 @@
 				BC733AEB21FB280800BC110F /* AddContactViewController.xib in Resources */,
 				BC733AE121FB0B3F00BC110F /* ForgottenPasswordViewController.xib in Resources */,
 				BC49D04C22006D5C00378D1C /* newContact.png in Resources */,
+				1CA2F3E22200938300349D99 /* edit.png in Resources */,
 				BC733AF321FB285700BC110F /* EditUserViewController.xib in Resources */,
 				1C2F4B6D21F89FB100D4B9FC /* Main.storyboard in Resources */,
 				BC49D04B22006D5C00378D1C /* logout.png in Resources */,
