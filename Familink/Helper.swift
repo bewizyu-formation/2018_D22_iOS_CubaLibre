@@ -10,21 +10,22 @@ import Foundation
 import UIKit
 import CoreData
 
-func getToken() -> String {
+func getToken() -> String? {
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-        return ""
+        return nil
     }
     let context = appDelegate.persistentContainer.viewContext
     
     let fetchRequest: NSFetchRequest<Token> = Token.fetchRequest()
     if let result = try? context.fetch(fetchRequest) {
         
-        // Il ne doit y avoir qu'un seul JWT en base de données
-        
-        guard let token = result[0].value else {
-            return ""
+        if (!result.isEmpty) {
+            
+            // Il ne doit y avoir qu'un seul JWT en base de données
+            guard let token = result[0].value else { return nil }
+            return token
         }
-        return token
+        return nil
     }
-    return ""
+    return nil
 }

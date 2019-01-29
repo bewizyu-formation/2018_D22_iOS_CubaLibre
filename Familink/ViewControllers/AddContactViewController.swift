@@ -48,9 +48,9 @@ class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return profilePickerData[row]
+        return profilePickerData[row]
     }
-
+    
     @IBAction func onCreateContactButton(_ sender: Any) {
         
         if(!checkValidfields()){
@@ -60,29 +60,41 @@ class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPicker
             return
         }
         
-        let contact = Contact(context: self.getContext()!)
-        contact.firstName = firstNameTextInput.text
-        contact.lastName = lastNameTextInput.text
-        contact.phone = phoneTextInput.text
-        contact.email = emailTextField.text
-        contact.gravatar = "https://www.gravatar.com/avatar/601e257a31da0193b9bac803405f3664"
-        contact.profile = profilePickerData[profilePicker.selectedRow(inComponent: 0)]
-        contact.isFamilinkUser = isFamilinkUserSwitch.isOn
-        contact.isEmergencyUser = isEmergencyUserSwitch.isOn
-        
-        let loader = UIViewController.displaySpinner(onView: self.view)
-        APIClient.instance.addContact(token: getToken(), contact: contact, onSuccess: { (_) in
-            UIViewController.removeSpinner(spinner: loader)
-            DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+        if let context = self.getContext() {
+            let contact = Contact(context: context)
+            contact.firstName = firstNameTextInput.text
+            contact.lastName = lastNameTextInput.text
+            contact.phone = phoneTextInput.text
+            contact.email = emailTextField.text
+            contact.gravatar = "https://www.gravatar.com/avatar/601e257a31da0193b9bac803405f3664"
+            contact.profile = profilePickerData[profilePicker.selectedRow(inComponent: 0)]
+            contact.isFamilinkUser = isFamilinkUserSwitch.isOn
+            contact.isEmergencyUser = isEmergencyUserSwitch.isOn
+            
+            if let token = getToken() {
+                let loader = UIViewController.displaySpinner(onView: self.view)
+                
+                context.insert(contact)
+                try? context.save()
+                
+                _ = APIClient.instance.addContact(token: token, contact: contact, onSuccess: { (_) in
+                    UIViewController.removeSpinner(spinner: loader)
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }) { (error) in
+                    UIViewController.removeSpinner(spinner: loader)
+                    let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alert, animated: true)
+                }
             }
-        }) { (error) in
-            UIViewController.removeSpinner(spinner: loader)
-            let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            else {
+                let alert = UIAlertController(title: "Désolé !", message: "L'ajout d'utilisateur n'est pas disponible en mode hors ligne (on check juste s'il y a un JWT, pas si l'utilisateur est connecté ou non)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true)
+            }
         }
-        
     }
     
     func checkValidfields() -> Bool {
@@ -109,7 +121,7 @@ class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         return isValid
     }
-
+    
     @IBAction func onFirstNameFieldChange(_ sender: Any) {
         (sender as! UITextField).layer.borderColor = UIColor.rosyBrown.cgColor
     }
@@ -154,7 +166,7 @@ class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         isEmergencyUserLabel.textColor = .oldRose
         isEmergencyUserSwitch.onTintColor = .oldRose
-    
+        
         createContactButton.layer.cornerRadius = createContactButton.frame.height/2
         createContactButton.backgroundColor = .oldRose
         createContactButton.setTitleColor(.seaShell, for: .normal)
