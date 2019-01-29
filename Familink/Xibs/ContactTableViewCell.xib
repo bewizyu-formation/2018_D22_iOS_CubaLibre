@@ -38,7 +38,7 @@
                                         <attributedString key="attributedText">
                                             <fragment content="Contact">
                                                 <attributes>
-                                                    <font key="NSFont" size="17" name="Noteworthy-Light"/>
+                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>

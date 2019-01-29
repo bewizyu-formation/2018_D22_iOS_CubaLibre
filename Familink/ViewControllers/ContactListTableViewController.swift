@@ -10,14 +10,18 @@ import UIKit
 import MessageUI
 
 class ContactListTableViewController: UITableViewController {
-    
+
     var contacts = [Contact]()
 
-    @IBOutlet weak var DisconnectButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: "ContactTableViewCell")
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        _ = APIClient.instance.getToken(login : "0600000002", password : "0000", onSuccess: self.tokenDidFetch, onError: self.tokenErrorDidFetch)
+        tableView.backgroundColor = UIColor.seaShell
     }
     
     func contactsDidFetch(contactList : [Contact]) {
@@ -38,12 +42,6 @@ class ContactListTableViewController: UITableViewController {
         print("Error is : " + error)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        _ = APIClient.instance.getToken(login : "0600000002", password : "0000", onSuccess: self.tokenDidFetch, onError: self.tokenErrorDidFetch)
-        tableView.backgroundColor = UIColor.champagnePink
-    }
-    
     @IBAction func onUserButtonPressed(_ sender: Any) {
         let userDetailsController = UserDetailsViewController(nibName:nil, bundle: nil)
         self.navigationController?.pushViewController(userDetailsController, animated: true)
@@ -57,15 +55,12 @@ class ContactListTableViewController: UITableViewController {
     @IBAction func onDisconnectButtonPress(_ sender: Any) {
         NotificationCenter.default.post(name: .didUserDisconnect, object: nil)
     }
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return contacts.count
     }
     
@@ -75,8 +70,8 @@ class ContactListTableViewController: UITableViewController {
         
         cell.contactLabelTitle.text = (contact.firstName ?? "") + " " + (contact.lastName ?? "")
         cell.contactLabelTitle.layoutMargins = UIEdgeInsets(top: 0, left: 75, bottom: 0, right: 0)
-        cell.backgroundColor = UIColor.champagnePink
-        cell.contactLabelTitleView.backgroundColor = UIColor.champagnePink
+        cell.backgroundColor = UIColor.seaShell
+        cell.contactLabelTitleView.backgroundColor = UIColor.seaShell
         cell.contactLabelTitle.textColor = UIColor.oldRose
         
         guard let gravatar = contact.gravatar else {
@@ -146,30 +141,4 @@ class ContactListTableViewController: UITableViewController {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
