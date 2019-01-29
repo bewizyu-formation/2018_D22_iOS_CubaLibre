@@ -172,6 +172,7 @@ class APIClient {
         return task
     }
     
+    @discardableResult
     func addUser(user : User, password : String, onSuccess: @escaping (String) -> (), onError: @escaping (String) -> ()) -> URLSessionTask {
         let jsonData = createJsonDataFromUser(userToParseInJson: user, password: password)
         

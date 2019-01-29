@@ -12,6 +12,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignUpViewController" customModule="Familink" customModuleProvider="target">
             <connections>
+                <outlet property="errorMessageFirstnameLabel" destination="NjO-ki-vqE" id="PoF-wh-Zm8"/>
+                <outlet property="errorMessageMailLabel" destination="3Jq-Em-Wxc" id="Uuk-aB-TNI"/>
+                <outlet property="errorMessageNameLabel" destination="vDt-lN-QwR" id="A9I-0J-Y8P"/>
+                <outlet property="errorMessagePasswordLabel" destination="kZi-E6-M40" id="kJI-f7-iL8"/>
+                <outlet property="errorMessagePhoneLabel" destination="nmV-Yd-xBL" id="exW-II-VOE"/>
+                <outlet property="errorMessageProfileLabel" destination="Wz4-fU-nF9" id="eX5-pT-ytJ"/>
+                <outlet property="firstnameTextField" destination="CVO-SF-gOX" id="7dX-7i-nvQ"/>
+                <outlet property="mailTextField" destination="2PY-0G-ROy" id="age-Mn-r0U"/>
+                <outlet property="nameTextField" destination="Fr4-r2-JIz" id="C3g-mO-W5Y"/>
+                <outlet property="passwordTextField" destination="JYw-nq-Bug" id="nSh-S9-xPg"/>
+                <outlet property="phoneTextField" destination="llq-Us-Ef5" id="kgx-jl-vCV"/>
+                <outlet property="pickerTextField" destination="IFb-J2-VYM" id="H7g-h3-MIo"/>
+                <outlet property="profileTextField" destination="IFb-J2-VYM" id="ZHo-JQ-ga9"/>
+                <outlet property="scrollView" destination="HmY-wC-4oE" id="o4U-xK-Tzt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,25 +34,162 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Inscrivez-vous ! :)" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fr4-r2-JIz">
-                    <rect key="frame" x="119" y="275" width="136" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HjV-O5-Tsd">
-                    <rect key="frame" x="100" y="407" width="175" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="S'inscrire et se connecter"/>
-                    <connections>
-                        <action selector="SignUpAndConnect:" destination="-1" eventType="touchUpInside" id="SMG-VF-QaH"/>
-                    </connections>
-                </button>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HmY-wC-4oE">
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uHH-MG-XSo">
+                            <rect key="frame" x="0.0" y="20" width="375" height="564"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="PcE-hb-H9I">
+                                    <rect key="frame" x="20" y="0.0" width="335" height="564"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numéro de téléphone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vd-XV-sO7">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Saisissez votre téléphone" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="llq-Us-Ef5">
+                                            <rect key="frame" x="0.0" y="27.5" width="335" height="30"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" textContentType="tel"/>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Champ obligatoire" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmV-Yd-xBL">
+                                            <rect key="frame" x="0.0" y="64.5" width="335" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkJ-nK-YJT">
+                                            <rect key="frame" x="0.0" y="88.5" width="335" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" red="0.75686274509803919" green="0.59215686274509804" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Saisissez votre nom" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fr4-r2-JIz">
+                                            <rect key="frame" x="0.0" y="116" width="335" height="30"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" textContentType="name"/>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Champ obligatoire" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDt-lN-QwR">
+                                            <rect key="frame" x="0.0" y="153" width="335" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prénom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLz-94-h2h">
+                                            <rect key="frame" x="0.0" y="177" width="335" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Saisissez votre prénom" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CVO-SF-gOX">
+                                            <rect key="frame" x="0.0" y="204.5" width="335" height="30"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" textContentType="name"/>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Champ obligatoire" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NjO-ki-vqE">
+                                            <rect key="frame" x="0.0" y="241.5" width="335" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mot de passe (4 chiffres)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gim-Tc-aGx">
+                                            <rect key="frame" x="0.0" y="265.5" width="335" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Saisissez votre mot de passe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JYw-nq-Bug">
+                                            <rect key="frame" x="0.0" y="293" width="335" height="30"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" textContentType="password"/>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Champ obligatoire" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZi-E6-M40">
+                                            <rect key="frame" x="0.0" y="330" width="335" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DvK-wV-rlp">
+                                            <rect key="frame" x="0.0" y="354" width="335" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Choisir..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IFb-J2-VYM">
+                                            <rect key="frame" x="0.0" y="381.5" width="335" height="30"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Champ obligatoire" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz4-fU-nF9">
+                                            <rect key="frame" x="0.0" y="418.5" width="335" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ho-kr-YrC">
+                                            <rect key="frame" x="0.0" y="442.5" width="335" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Saisissez votre mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2PY-0G-ROy">
+                                            <rect key="frame" x="0.0" y="470" width="335" height="30"/>
+                                            <color key="textColor" red="0.75686274509999996" green="0.59215686270000001" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" textContentType="email"/>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Champ obligatoire" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Jq-Em-Wxc">
+                                            <rect key="frame" x="0.0" y="507" width="335" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HjV-O5-Tsd">
+                                            <rect key="frame" x="0.0" y="531" width="335" height="33"/>
+                                            <color key="backgroundColor" red="0.75686274509803919" green="0.59215686274509804" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="S'inscrire et se connecter"/>
+                                            <connections>
+                                                <action selector="SignUpAndConnect:" destination="-1" eventType="touchUpInside" id="SMG-VF-QaH"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="PcE-hb-H9I" secondAttribute="bottom" id="HnN-MQ-FyN"/>
+                                <constraint firstItem="PcE-hb-H9I" firstAttribute="leading" secondItem="uHH-MG-XSo" secondAttribute="leading" constant="20" id="TAQ-Jh-Vpr"/>
+                                <constraint firstItem="PcE-hb-H9I" firstAttribute="top" secondItem="uHH-MG-XSo" secondAttribute="top" id="YTg-06-JOd"/>
+                                <constraint firstAttribute="trailing" secondItem="PcE-hb-H9I" secondAttribute="trailing" constant="20" id="mri-KS-SW8"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="uHH-MG-XSo" secondAttribute="bottom" id="SFd-3f-kdy"/>
+                        <constraint firstItem="uHH-MG-XSo" firstAttribute="top" secondItem="HmY-wC-4oE" secondAttribute="top" constant="20" id="Z2I-tC-SXa"/>
+                        <constraint firstItem="uHH-MG-XSo" firstAttribute="leading" secondItem="HmY-wC-4oE" secondAttribute="leading" id="esC-0B-EFc"/>
+                        <constraint firstAttribute="trailing" secondItem="uHH-MG-XSo" secondAttribute="trailing" id="mjy-9f-DCe"/>
+                    </constraints>
+                </scrollView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.9882352941176471" green="0.94901960784313721" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="HmY-wC-4oE" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="2dW-Ge-evO"/>
+                <constraint firstItem="HmY-wC-4oE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WLH-XV-f0N"/>
+                <constraint firstItem="uHH-MG-XSo" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" id="ZaP-4G-mZf"/>
+                <constraint firstItem="HmY-wC-4oE" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="kV7-kh-Sbk"/>
+                <constraint firstItem="HmY-wC-4oE" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="pQe-5H-Rzw"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="39.200000000000003" y="46.326836581709152"/>
+            <point key="canvasLocation" x="140" y="18.440779610194905"/>
         </view>
     </objects>
 </document>
