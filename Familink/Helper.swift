@@ -18,6 +18,9 @@ func getToken() -> String {
     
     let fetchRequest: NSFetchRequest<Token> = Token.fetchRequest()
     if let result = try? context.fetch(fetchRequest) {
+        
+        // Il ne doit y avoir qu'un seul JWT en base de données
+        
         guard let token = result[0].value else {
             return ""
         }

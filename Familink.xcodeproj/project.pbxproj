@@ -16,11 +16,12 @@
 		1C2F4B8021F89FB200D4B9FC /* FamilinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F4B7F21F89FB200D4B9FC /* FamilinkTests.swift */; };
 		1C2F4B8B21F89FB200D4B9FC /* FamilinkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F4B8A21F89FB200D4B9FC /* FamilinkUITests.swift */; };
 		1C6AA2F921F9EDA70036C997 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6AA2F821F9EDA70036C997 /* APIClient.swift */; };
+		1CA8927621FF05520087D393 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8927521FF05520087D393 /* Colors.swift */; };
+		1CA8927B21FF41470087D393 /* LoaderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8927A21FF41470087D393 /* LoaderScreen.swift */; };
 		BC49D03C220049E400378D1C /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = BC49D03B220049E400378D1C /* logout.png */; };
 		BC49D03E22004DA900378D1C /* newContact.png in Resources */ = {isa = PBXBuildFile; fileRef = BC49D03D22004DA900378D1C /* newContact.png */; };
 		BC49D04022004E5000378D1C /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = BC49D03F22004E5000378D1C /* profile.png */; };
-		1CA8927621FF05520087D393 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8927521FF05520087D393 /* Colors.swift */; };
-		1CA8927B21FF41470087D393 /* LoaderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8927A21FF41470087D393 /* LoaderScreen.swift */; };
+		BC49D04622006A1600378D1C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC49D04522006A1500378D1C /* Helper.swift */; };
 		BC733AE021FB0B3F00BC110F /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733ADE21FB0B3F00BC110F /* ForgottenPasswordViewController.swift */; };
 		BC733AE121FB0B3F00BC110F /* ForgottenPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC733ADF21FB0B3F00BC110F /* ForgottenPasswordViewController.xib */; };
 		BC733AE321FB0C4300BC110F /* ContactListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733AE221FB0C4300BC110F /* ContactListTableViewController.swift */; };
@@ -37,7 +38,6 @@
 		BC733B0021FB410F00BC110F /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733AFE21FB410F00BC110F /* ContactTableViewCell.swift */; };
 		BC733B0121FB410F00BC110F /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC733AFF21FB410F00BC110F /* ContactTableViewCell.xib */; };
 		BC8AEB0D21FF032F00E9028B /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = BC8AEB0C21FF032F00E9028B /* loading.gif */; };
-		BC8AEB1021FF440700E9028B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8AEB0F21FF440700E9028B /* Colors.swift */; };
 		BC8AEB1221FF65DD00E9028B /* profileLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = BC8AEB1121FF65DC00E9028B /* profileLogo.png */; };
 		BC8D5C7521FA1D3400A20B93 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8D5C7321FA1D3400A20B93 /* SignUpViewController.swift */; };
 		BC8D5C7621FA1D3400A20B93 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC8D5C7421FA1D3400A20B93 /* SignUpViewController.xib */; };
@@ -77,11 +77,12 @@
 		1C2F4B8A21F89FB200D4B9FC /* FamilinkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilinkUITests.swift; sourceTree = "<group>"; };
 		1C2F4B8C21F89FB200D4B9FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C6AA2F821F9EDA70036C997 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		1CA8927521FF05520087D393 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		1CA8927A21FF41470087D393 /* LoaderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderScreen.swift; sourceTree = "<group>"; };
 		BC49D03B220049E400378D1C /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logout.png; path = ../../../../Downloads/logout.png; sourceTree = "<group>"; };
 		BC49D03D22004DA900378D1C /* newContact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = newContact.png; path = ../../../../Downloads/newContact.png; sourceTree = "<group>"; };
 		BC49D03F22004E5000378D1C /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profile.png; path = ../../../../Downloads/profile.png; sourceTree = "<group>"; };
-		1CA8927521FF05520087D393 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		1CA8927A21FF41470087D393 /* LoaderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderScreen.swift; sourceTree = "<group>"; };
+		BC49D04522006A1500378D1C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		BC733ADE21FB0B3F00BC110F /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		BC733ADF21FB0B3F00BC110F /* ForgottenPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgottenPasswordViewController.xib; sourceTree = "<group>"; };
 		BC733AE221FB0C4300BC110F /* ContactListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListTableViewController.swift; sourceTree = "<group>"; };
@@ -98,7 +99,6 @@
 		BC733AFE21FB410F00BC110F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		BC733AFF21FB410F00BC110F /* ContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
 		BC8AEB0C21FF032F00E9028B /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = loading.gif; path = ../../../../Downloads/loading.gif; sourceTree = "<group>"; };
-		BC8AEB0F21FF440700E9028B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		BC8AEB1121FF65DC00E9028B /* profileLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profileLogo.png; path = ../../../../Downloads/profileLogo.png; sourceTree = "<group>"; };
 		BC8D5C7321FA1D3400A20B93 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		BC8D5C7421FA1D3400A20B93 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
@@ -153,6 +153,7 @@
 		1C2F4B6621F89FB100D4B9FC /* Familink */ = {
 			isa = PBXGroup;
 			children = (
+				BC49D04522006A1500378D1C /* Helper.swift */,
 				BC8AEB0B21FF030700E9028B /* Assets */,
 				1CA8927421FF05360087D393 /* UI */,
 				1C6AA2F721F9ED940036C997 /* API */,
@@ -195,6 +196,15 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		1CA8927421FF05360087D393 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1CA8927521FF05520087D393 /* Colors.swift */,
+				1CA8927A21FF41470087D393 /* LoaderScreen.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		BC8AEB0B21FF030700E9028B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,15 +215,6 @@
 				BC49D03F22004E5000378D1C /* profile.png */,
 			);
 			path = Assets;
-			sourceTree = "<group>";
-		};
-		1CA8927421FF05360087D393 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				1CA8927521FF05520087D393 /* Colors.swift */,
-				1CA8927A21FF41470087D393 /* LoaderScreen.swift */,
-			);
-			path = UI;
 			sourceTree = "<group>";
 		};
 		BC8D5C5B21F9D44800A20B93 /* Xibs */ = {
@@ -421,6 +422,7 @@
 				BC733AFC21FB2D0D00BC110F /* ContactDetailsViewController.swift in Sources */,
 				BC733AE321FB0C4300BC110F /* ContactListTableViewController.swift in Sources */,
 				BC733AEA21FB280800BC110F /* AddContactViewController.swift in Sources */,
+				BC49D04622006A1600378D1C /* Helper.swift in Sources */,
 				BC733AF221FB285700BC110F /* EditUserViewController.swift in Sources */,
 				1C2F4B6A21F89FB100D4B9FC /* ViewController.swift in Sources */,
 				1C2F4B7021F89FB100D4B9FC /* Familink.xcdatamodeld in Sources */,
