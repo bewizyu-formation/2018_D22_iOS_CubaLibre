@@ -11,11 +11,18 @@ import UIKit
 class ContactDetailsViewController: UIViewController {
 
     var contact: String!
+
+    @IBOutlet weak var gravatarUIView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        gravatarUIView.image
+    }
     
     @IBAction func onEditButtonPressed(_ sender: Any) {
         let editContactController = EditContactViewController(nibName:nil, bundle: nil)
