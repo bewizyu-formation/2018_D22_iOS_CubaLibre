@@ -149,7 +149,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.31764705879999999" green="0.76078431369999999" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.75686274509803919" green="0.59215686274509804" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mKI-GE-PiL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KvI-5C-tH5"/>
                             <constraint firstItem="bOC-ti-lPG" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="NuJ-la-zBd"/>
@@ -183,7 +183,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.31764705879999999" green="0.76078431369999999" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.75686274509803919" green="0.59215686274509804" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
