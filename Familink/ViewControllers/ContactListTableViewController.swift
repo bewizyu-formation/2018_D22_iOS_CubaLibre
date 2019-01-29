@@ -20,24 +20,22 @@ class ContactListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        _ = APIClient.instance.getToken(login : "0600000002", password : "0000", onSuccess: self.tokenDidFetch, onError: self.tokenErrorDidFetch)
+        
+        let token = getToken()
+        
+        _ = APIClient.instance.getContactList(token: token, onSuccess: self.contactsDidFetch, onError: self.contactsErrorDidFetch)
+        
         tableView.backgroundColor = UIColor.seaShell
     }
     
     func contactsDidFetch(contactList : [Contact]) {
         contacts = contactList
-        print(contactList)
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
     
-    func tokenDidFetch(token: String) {
-        print("Token is : " + token)
-        _ = APIClient.instance.getContactList(token: token, onSuccess: self.contactsDidFetch, onError: self.tokenErrorDidFetch)
-    }
-    
-    func tokenErrorDidFetch(error: String) {
+    func contactsErrorDidFetch(error: String) {
         print("Error while fetching token")
         print("Error is : " + error)
     }
@@ -116,7 +114,6 @@ class ContactListTableViewController: UITableViewController {
         call.backgroundColor = .green
         
         let mail = UITableViewRowAction(style: .normal, title: "Envoyer un email") { action, index in
-            print("mail button")
             if MFMailComposeViewController.canSendMail() {
                 
                 guard let contactEmail = self.contacts[index[1]].email else { return }
