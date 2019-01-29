@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Contact List-->
+        <!--Mes contacts-->
         <scene sceneID="aEt-rG-UWh">
             <objects>
                 <tableViewController storyboardIdentifier="ContactListTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pbF-Pb-OY3" customClass="ContactListTableViewController" customModule="Familink" customModuleProvider="target" sceneMemberID="viewController">
@@ -40,28 +40,22 @@
                             <outlet property="delegate" destination="pbF-Pb-OY3" id="lah-L6-FeO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Contact List" id="lv9-3h-Vjc">
+                    <navigationItem key="navigationItem" title="Mes contacts" id="lv9-3h-Vjc">
                         <rightBarButtonItems>
-                            <barButtonItem title="Déconnexion" id="L5K-dJ-BSC">
-                                <connections>
-                                    <action selector="onDisconnectButtonPress:" destination="pbF-Pb-OY3" id="YDD-A9-iQb"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="User" id="Hi5-pi-m89">
+                            <barButtonItem title="User" image="profile.png" id="Hi5-pi-m89">
+                                <color key="tintColor" red="0.49803921568627452" green="0.32941176470588235" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onUserButtonPressed:" destination="pbF-Pb-OY3" id="Opg-hr-A3w"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Ajout" id="OgC-Be-Dae">
+                            <barButtonItem title="Ajout" image="newContact.png" id="OgC-Be-Dae">
+                                <color key="tintColor" red="0.49803921568627452" green="0.32941176470588235" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="addContactButtonPressed:" destination="pbF-Pb-OY3" id="YHh-yQ-fSO"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
-                    <connections>
-                        <outlet property="DisconnectButton" destination="L5K-dJ-BSC" id="Ogs-ZE-JBX"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gjy-Xr-rHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -245,6 +239,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="newContact.png" width="30" height="30"/>
+        <image name="profile.png" width="32" height="32"/>
         <image name="logo" width="52.560001373291016" height="56.880001068115234"/>
     </resources>
 </document>
