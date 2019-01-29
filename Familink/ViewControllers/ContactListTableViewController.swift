@@ -7,26 +7,38 @@
 //
 
 import UIKit
+import MessageUI
 
 class ContactListTableViewController: UITableViewController {
-    
-    var contacts = [String]()
 
-    @IBOutlet weak var DisconnectButton: UIBarButtonItem!
+    var contacts = [Contact]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        contacts.append("pop:p")
-        
         tableView.register(UINib(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: "ContactTableViewCell")
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let token = getToken()
+        
+        _ = APIClient.instance.getContactList(token: token, onSuccess: self.contactsDidFetch, onError: self.contactsErrorDidFetch)
+        
+        tableView.backgroundColor = UIColor.seaShell
+    }
+    
+    func contactsDidFetch(contactList : [Contact]) {
+        contacts = contactList
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func contactsErrorDidFetch(error: String) {
+        print("Error while fetching token")
+        print("Error is : " + error)
+    }
     
     @IBAction func onUserButtonPressed(_ sender: Any) {
         let userDetailsController = UserDetailsViewController(nibName:nil, bundle: nil)
@@ -41,88 +53,89 @@ class ContactListTableViewController: UITableViewController {
     @IBAction func onDisconnectButtonPress(_ sender: Any) {
         NotificationCenter.default.post(name: .didUserDisconnect, object: nil)
     }
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return contacts.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell", for: indexPath) as! ContactTableViewCell
+        let contact = contacts[indexPath.row]
         
-        // Configure the cell...
-        cell.contactLabelTitle.text = contacts[indexPath.row]
+        cell.contactLabelTitle.text = (contact.firstName ?? "") + " " + (contact.lastName ?? "")
+        cell.contactLabelTitle.layoutMargins = UIEdgeInsets(top: 0, left: 75, bottom: 0, right: 0)
+        cell.backgroundColor = UIColor.seaShell
+        cell.contactLabelTitleView.backgroundColor = UIColor.seaShell
+        cell.contactLabelTitle.textColor = UIColor.oldRose
         
+        guard let gravatar = contact.gravatar else {
+            return cell
+        }
+        guard let url = URL(string: gravatar) else {
+            return cell
+        }
+        guard let data = try? Data(contentsOf: url) else {
+            return cell
+        }
+        cell.contactImage.image = UIImage(data: data)
+
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ContactDetailsViewController(nibName:nil, bundle: nil)
-        vc.contact = contacts[indexPath.row]
+        vc.contact = "test" //contacts[indexPath.row]
 
         
         self.show(vc, sender: self)
     }
     
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+    override func tableView(_ tableView: UITableView, editActionsForRowAt index: IndexPath) -> [UITableViewRowAction]? {
+        
+        let call = UITableViewRowAction(style: .normal, title: "Appeler") { action, index in
+            
+            guard let phone = self.contacts[index[1]].phone else { return }
+            guard let number = URL(string: "tel://" + phone) else { return }
+            if (UIApplication.shared.canOpenURL(number))
+            {
+                UIApplication.shared.open(number)
+            }
+            else {
+                let alert = UIAlertController(title: "Désolé !", message: "Votre téléphone ne supporte pas de passer des appels", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        
+        call.backgroundColor = .green
+        
+        let mail = UITableViewRowAction(style: .normal, title: "Envoyer un email") { action, index in
+            if MFMailComposeViewController.canSendMail() {
+                
+                guard let contactEmail = self.contacts[index[1]].email else { return }
 
-        // Configure the cell...
+                let mail = MFMailComposeViewController()
+                mail.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
+                mail.setToRecipients([contactEmail])
+                
+                self.present(mail, animated: true)
+            } else {
+                let alert = UIAlertController(title: "Désolé !", message: "Votre téléphone ne supporte pas l'envoi d'email", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        mail.backgroundColor = .orange
 
-        return cell
+        return [call, mail]
+
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
