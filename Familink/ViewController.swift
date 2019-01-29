@@ -15,7 +15,7 @@ extension Notification.Name {
 
 class ViewController: UIViewController {
     private var token : String = ""
-
+    
     @IBOutlet weak var LoginContainerView: UIView!
     @IBOutlet weak var ContactListContainerView: UIView!
     
@@ -39,13 +39,18 @@ class ViewController: UIViewController {
     
     
     func toggleUINavigation() {
-        if (isConnected) {
-            LoginContainerView.alpha = 0
-            ContactListContainerView.alpha = 1
+        if (isConnected)
+        {
+            UIView.animate(withDuration: -1, animations: {
+                self.LoginContainerView.alpha = 0
+                self.ContactListContainerView.alpha = 1
+            })
         }
         else {
-            LoginContainerView.alpha = 1
-            ContactListContainerView.alpha = 0
+            UIView.animate(withDuration: -1, animations: {
+                self.LoginContainerView.alpha = 1
+                self.ContactListContainerView.alpha = 0
+            })
         }
     }
     

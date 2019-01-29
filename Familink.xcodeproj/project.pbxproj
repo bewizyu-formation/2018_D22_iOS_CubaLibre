@@ -19,6 +19,8 @@
 		BC49D03C220049E400378D1C /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = BC49D03B220049E400378D1C /* logout.png */; };
 		BC49D03E22004DA900378D1C /* newContact.png in Resources */ = {isa = PBXBuildFile; fileRef = BC49D03D22004DA900378D1C /* newContact.png */; };
 		BC49D04022004E5000378D1C /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = BC49D03F22004E5000378D1C /* profile.png */; };
+		1CA8927621FF05520087D393 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8927521FF05520087D393 /* Colors.swift */; };
+		1CA8927B21FF41470087D393 /* LoaderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8927A21FF41470087D393 /* LoaderScreen.swift */; };
 		BC733AE021FB0B3F00BC110F /* ForgottenPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733ADE21FB0B3F00BC110F /* ForgottenPasswordViewController.swift */; };
 		BC733AE121FB0B3F00BC110F /* ForgottenPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC733ADF21FB0B3F00BC110F /* ForgottenPasswordViewController.xib */; };
 		BC733AE321FB0C4300BC110F /* ContactListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC733AE221FB0C4300BC110F /* ContactListTableViewController.swift */; };
@@ -78,6 +80,8 @@
 		BC49D03B220049E400378D1C /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logout.png; path = ../../../../Downloads/logout.png; sourceTree = "<group>"; };
 		BC49D03D22004DA900378D1C /* newContact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = newContact.png; path = ../../../../Downloads/newContact.png; sourceTree = "<group>"; };
 		BC49D03F22004E5000378D1C /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = profile.png; path = ../../../../Downloads/profile.png; sourceTree = "<group>"; };
+		1CA8927521FF05520087D393 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		1CA8927A21FF41470087D393 /* LoaderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderScreen.swift; sourceTree = "<group>"; };
 		BC733ADE21FB0B3F00BC110F /* ForgottenPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenPasswordViewController.swift; sourceTree = "<group>"; };
 		BC733ADF21FB0B3F00BC110F /* ForgottenPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgottenPasswordViewController.xib; sourceTree = "<group>"; };
 		BC733AE221FB0C4300BC110F /* ContactListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListTableViewController.swift; sourceTree = "<group>"; };
@@ -149,8 +153,8 @@
 		1C2F4B6621F89FB100D4B9FC /* Familink */ = {
 			isa = PBXGroup;
 			children = (
-				BC8AEB0E21FF43EE00E9028B /* UI */,
 				BC8AEB0B21FF030700E9028B /* Assets */,
+				1CA8927421FF05360087D393 /* UI */,
 				1C6AA2F721F9ED940036C997 /* API */,
 				BC8D5C5B21F9D44800A20B93 /* Xibs */,
 				BC8D5C7221FA1C3B00A20B93 /* ViewControllers */,
@@ -203,10 +207,11 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		BC8AEB0E21FF43EE00E9028B /* UI */ = {
+		1CA8927421FF05360087D393 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				BC8AEB0F21FF440700E9028B /* Colors.swift */,
+				1CA8927521FF05520087D393 /* Colors.swift */,
+				1CA8927A21FF41470087D393 /* LoaderScreen.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -409,9 +414,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC733B0021FB410F00BC110F /* ContactTableViewCell.swift in Sources */,
-				BC8AEB1021FF440700E9028B /* Colors.swift in Sources */,
+				1CA8927621FF05520087D393 /* Colors.swift in Sources */,
 				BC733AE021FB0B3F00BC110F /* ForgottenPasswordViewController.swift in Sources */,
 				BC8D5C7A21FA202200A20B93 /* LoginUIViewController.swift in Sources */,
+				1CA8927B21FF41470087D393 /* LoaderScreen.swift in Sources */,
 				BC733AFC21FB2D0D00BC110F /* ContactDetailsViewController.swift in Sources */,
 				BC733AE321FB0C4300BC110F /* ContactListTableViewController.swift in Sources */,
 				BC733AEA21FB280800BC110F /* AddContactViewController.swift in Sources */,
