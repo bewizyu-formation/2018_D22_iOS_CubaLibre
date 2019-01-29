@@ -163,7 +163,8 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ContactDetailsViewController(nibName:nil, bundle: nil)
-        vc.contact = "test" //contacts[indexPath.row]
+        let contact = contacts[indexPath.row]
+        vc.contact = contact //contacts[indexPath.row]
 
         
         self.show(vc, sender: self)
