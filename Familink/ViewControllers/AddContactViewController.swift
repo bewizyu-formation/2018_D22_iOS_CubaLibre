@@ -37,7 +37,6 @@ class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPicker
         profilePickerData = ["Famille", "Senior", "Médecin"]
         
         self.initViewUI()
-        // Do any additional setup after loading the view.
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -124,7 +123,6 @@ class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     func initViewUI() {
-        //self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.navigationBar.barTintColor = .rosyBrown
         self.navigationController?.navigationBar.tintColor = .seaShell
         self.view.backgroundColor = .seaShell
@@ -172,28 +170,4 @@ class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPicker
         return appDelegate.persistentContainer.viewContext
     }
     
-    func getToken() -> String {
-        let context = getContext()
-        
-        var token = ""
-        let fetchRequest: NSFetchRequest<Token> = Token.fetchRequest()
-        if let result = try? context!.fetch(fetchRequest) {
-            for object in result {
-                token = object.value ?? ""
-            }
-        }
-        
-        return token
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
