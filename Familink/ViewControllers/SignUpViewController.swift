@@ -31,9 +31,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var pickOption = ["Famille", "Senior", "Médecin"]
-    
-    var error = false
+    var pickOption = ["Famille", "Senior", "Medecin"]
     
     var user : User?
     
@@ -62,6 +60,8 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     }
     
     @IBAction func SignUpAndConnect(_ sender: Any) {
+        
+        var error = false
         
         if !isValidPhone(value: phoneTextField.text ?? "") {
             error = true
@@ -122,14 +122,18 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
             if let context = getContext() {
                 let user = User(context: context)
                 
+                guard let password = passwordTextField.text else { return }
+                
+                guard let profile = profileTextField.text as? String else { return }
                 user.phone = phoneTextField.text
                 user.lastName = nameTextField.text
+                user.profile = profile.uppercased()
                 user.firstName = firstnameTextField.text
-                let password = passwordTextField.text
-                user.profile = profileTextField.text
                 user.email = mailTextField.text
                 
-                APIClient.instance.addUser(user: user, password: password ?? "", onSuccess: onAddUserSuccess, onError: onAddUserError)
+                print(profile)
+                
+                APIClient.instance.addUser(user: user, password: password, onSuccess: onAddUserSuccess, onError: onAddUserError)
             }
         }
     }
@@ -141,14 +145,30 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         return appDelegate.persistentContainer.viewContext
     }
     
-    func onAddUserSuccess (json: String) {
-        NotificationCenter.default.post(name: .didUserConnect, object: nil)
+    func onAddUserSuccess (user: User, password : String) {
+        DispatchQueue.main.async {
+            
+            _ = APIClient.instance.getToken(login: user.phone ?? "", password: password, onSuccess: { (token : String) in
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .didUserConnect, object: nil)
+                }
+            }, onError: { (errorMessage : String) in
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Erreur", message: errorMessage, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            })
+            
+        }
     }
     
     func onAddUserError (message: String) {
-      let alert = UIAlertController(title: "Erreur", message: "Utilisateur non ajouté", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Erreur", message: "Utilisateur non ajouté", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -164,7 +184,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pickerTextField.text = pickOption[row]
+        pickerTextField.text = pickOption[row] as String
     }
     
     func isValidPhone(value: String) -> Bool {

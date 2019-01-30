@@ -173,7 +173,7 @@ class APIClient {
     }
     
     @discardableResult
-    func addUser(user : User, password : String, onSuccess: @escaping (String) -> (), onError: @escaping (String) -> ()) -> URLSessionTask {
+    func addUser(user : User, password : String, onSuccess: @escaping (User, String) -> (), onError: @escaping (String) -> ()) -> URLSessionTask {
         let jsonData = createJsonDataFromUser(userToParseInJson: user, password: password)
         
         var request = URLRequest(url: URL(string: "\(BASE_URL)\(ADD_USER_URI)")! )
@@ -184,7 +184,18 @@ class APIClient {
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
                 if(httpResponse.statusCode == 200){
-                    onSuccess("User ajouté")
+                    if let dataResponse = data {
+                        if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [String: String]
+                            {
+                                let user = User(context: self.getContext()!)
+                                user.phone = jsonResponse[self.PHONE] ?? ""
+                                user.firstName = jsonResponse[self.FIRSTNAME] ?? ""
+                                user.lastName = jsonResponse[self.LASTNAME] ?? ""
+                                user.email = jsonResponse[self.EMAIL] ?? ""
+                                user.profile = jsonResponse[self.PROFILE] ?? ""
+                                onSuccess(user, password)
+                        }
+                    }
                 } else {
                     onError(self.getError(data: data))
                 }

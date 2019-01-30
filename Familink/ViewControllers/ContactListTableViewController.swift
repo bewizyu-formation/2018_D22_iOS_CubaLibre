@@ -93,35 +93,24 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @objc func onDidUserConnect(_ notification:Notification) {
-        let token = getToken()
+        let token = getToken() ?? ""
         
-        //_ = APIClient.instance.getContactList(token: token, onSuccess: self.setContactsToCoreData, onError: self.contactsFromAPIErrorDidFetch)
+        _ = APIClient.instance.getContactList(token: token, onSuccess: self.setContactsToCoreData, onError: self.contactsFromAPIErrorDidFetch)
     }
     
     func contactsFromAPIDidFetch(contactList : [Contact]) {
-    
-        
-        //contacts = contactList
-        //DispatchQueue.main.async {
-        //    self.tableView.reloadData()
-        //}
+        contacts = contactList
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func contactsFromAPIErrorDidFetch(error: String) {
         print("Error while fetching token")
         print("Error is : " + error)
     }
-    
+ 
     // buttons
     
     @IBAction func onUserButtonPressed(_ sender: Any) {
