@@ -38,6 +38,8 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
         self.initViewUI()
         self.initViewContent()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"delete"), style: .plain, target: self, action: #selector(onDeleteButtonPressed))
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -72,13 +74,51 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
                         }
                     }, onError: { (error) in
                         UIViewController.removeSpinner(spinner: loader)
-                        self.createAlert(title: error)
+                        self.createErrorMessageAlert(title: error)
                     })
                 } else {
                     UIViewController.removeSpinner(spinner: loader)
-                    self.createAlert(title: "La saisie n'est pas correcte")
+                    self.createErrorMessageAlert(title: "La saisie n'est pas correcte")
                 }
             }
+        }
+    }
+    
+    @objc func onDeleteButtonPressed() {
+        let alert = UIAlertController(title: "Confirmer la suppression", message: "Voulez-vous vraiment supprimer \(contact.firstName!) \(contact.lastName ?? "") ?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Annuler", style: .default, handler: nil))
+        
+        let validateDelete = UIAlertAction(title: "Supprimer", style: .destructive) { (action:UIAlertAction) in
+            let loader = UIViewController.displaySpinner(onView: self.view)
+            APIClient.instance.deleteContact(token: getToken()!, contactId: self.contact.contactId!, onSuccess: { (success) in
+                UIViewController.removeSpinner(spinner: loader)
+                self.deleteOnCoreData()
+                DispatchQueue.main.async {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+            }, onError: { (erreur) in
+                UIViewController.removeSpinner(spinner: loader)
+                self.createErrorMessageAlert(title: erreur)
+            })
+        }
+        
+        alert.addAction(validateDelete)
+        
+        self.present(alert, animated: true)
+    }
+    
+    func deleteOnCoreData(){
+        let context = getContext()!
+        
+        let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
+        fetchRequest.predicate = NSPredicate(format: "contactId == %@", self.contact.contactId!)
+        
+        let fetchedResults = try? context.fetch(fetchRequest)
+        if let contactToDelete = fetchedResults?.first {
+            context.delete(contactToDelete)
+            
+            try? context.save()
         }
     }
     
@@ -125,7 +165,7 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
         }
     }
     
-    func createAlert(title : String) {
+    func createErrorMessageAlert(title : String) {
         let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
