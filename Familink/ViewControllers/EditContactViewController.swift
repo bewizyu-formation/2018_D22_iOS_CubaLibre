@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var firstNameLabel: UILabel!
@@ -52,8 +53,119 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
 
     @IBAction func onValidateButtonPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        let loader = UIViewController.displaySpinner(onView: self.view)
+        UIView.animate(withDuration: -1, animations: {
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            self.saveButton.backgroundColor = .green
+            UIView.animate(withDuration: -1, animations: {
+                self.saveButton.backgroundColor = .rosyBrown
+            }) { (_) in
+                if(self.checkValidfields()){
+                    let contactToUpdate = self.createContact()
+                    //self.updateContactOnCoreData(contactUpdated: contactToUpdate)
+                    APIClient.instance.updateContact(token: getToken()!, contact: contactToUpdate, onSuccess: { (success) in
+                        UIViewController.removeSpinner(spinner: loader)
+                        DispatchQueue.main.async {
+                            self.navigationController?.popToRootViewController(animated: true)
+                            //self.navigationController?.popViewController(animated: true)
+                        }
+                    }, onError: { (error) in
+                        UIViewController.removeSpinner(spinner: loader)
+                        self.createAlert(title: error)
+                    })
+                } else {
+                    UIViewController.removeSpinner(spinner: loader)
+                    self.createAlert(title: "La saisie n'est pas correcte")
+                }
+            }
+        }
+    }
+    
+    func createContact() -> Contact {
+        let contactUpdated = Contact(context: getContext()!)
+        contactUpdated.contactId = contact.contactId
+        contactUpdated.firstName = firstNameTextInput.text
+        contactUpdated.lastName = lastNameTextInput.text
+        contactUpdated.phone = phoneTextInput.text
+        contactUpdated.email = emailTextInput.text
+        contactUpdated.gravatar = contact.gravatar
+        contactUpdated.profile = profilePickerData[profilePicker.selectedRow(inComponent: 0)]
+        contactUpdated.isFamilinkUser = isFamilinkUserSwitch.isOn
+        contactUpdated.isEmergencyUser = isEmergencyUserSwitch.isOn
         
+        return contactUpdated
+    }
+    
+    func getContext() -> NSManagedObjectContext? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        return appDelegate.persistentContainer.viewContext
+    }
+    
+    func updateContactOnCoreData(contactUpdated : Contact){
+
+        let context = getContext()!
+        
+        let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
+        fetchRequest.predicate = NSPredicate(format: "contactId == %@", contactUpdated.contactId!)
+        
+        let fetchedResults = try? context.fetch(fetchRequest)
+        if let contactToUpdate = fetchedResults?.first {
+            contactToUpdate.setValue(contactUpdated.firstName, forKey: "firstName")
+            contactToUpdate.setValue(contactUpdated.lastName, forKey: "lastName")
+            contactToUpdate.setValue(contactUpdated.phone, forKey: "phone")
+            contactToUpdate.setValue(contactUpdated.email, forKey: "email")
+            contactToUpdate.setValue(contactUpdated.profile, forKey: "profile")
+            contactToUpdate.setValue(contactUpdated.isFamilinkUser, forKey: "isFamilinkUser")
+            contactToUpdate.setValue(contactUpdated.isEmergencyUser, forKey: "isEmergencyUser")
+            
+            try? context.save()
+        }
+    }
+    
+    func createAlert(title : String) {
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
+    func checkValidfields() -> Bool {
+        var isValid = true
+        
+        if((firstNameTextInput.text?.count)! < 1){
+            firstNameTextInput.layer.borderColor = UIColor.red.cgColor
+            isValid = false
+        }
+        
+        let phoneRegex = "^(0[67])(?:[ _.-]?([0-9]{2})){4}"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
+        if(!phoneTest.evaluate(with: phoneTextInput.text)){
+            phoneTextInput.layer.borderColor = UIColor.red.cgColor
+            isValid = false
+        }
+        
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        if((emailTextInput.text?.count)! > 0 && !emailTest.evaluate(with: emailTextInput.text)){
+            emailTextInput.layer.borderColor = UIColor.red.cgColor
+            isValid = false
+        }
+        
+        return isValid
+    }
+    
+    @IBAction func onFirstNameChange(_ sender: Any) {
+        (sender as! UITextField).layer.borderColor = UIColor.rosyBrown.cgColor
+    }
+    
+    @IBAction func onPhoneChange(_ sender: Any) {
+        (sender as! UITextField).layer.borderColor = UIColor.rosyBrown.cgColor
+    }
+    
+    @IBAction func onEmailChange(_ sender: Any) {
+        (sender as! UITextField).layer.borderColor = UIColor.rosyBrown.cgColor
     }
     
     func initViewContent() {
@@ -61,6 +173,14 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
         lastNameTextInput.text = contact.lastName
         phoneTextInput.text = contact.phone
         emailTextInput.text = contact.email
+        switch contact.profile {
+        case "Famille":
+            profilePicker.selectRow(0, inComponent: 0, animated: true)
+        case "Senior":
+            profilePicker.selectRow(1, inComponent: 0, animated: true)
+        default:
+            profilePicker.selectRow(2, inComponent: 0, animated: true)
+        }
         isFamilinkUserSwitch.isOn = contact.isFamilinkUser
         isEmergencyUserSwitch.isOn = contact.isEmergencyUser
     }
@@ -105,15 +225,4 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
         saveButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         saveButton.layer.shadowOpacity = 1.0
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
