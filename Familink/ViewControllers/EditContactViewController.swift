@@ -9,6 +9,7 @@
 import UIKit
 
 class EditContactViewController: UIViewController {
+    var contact: Contact!
 
     override func viewDidLoad() {
         super.viewDidLoad()
