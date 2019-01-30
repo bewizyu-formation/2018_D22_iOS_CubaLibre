@@ -62,6 +62,9 @@
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="onFirstNameChange:" destination="-1" eventType="editingChanged" id="Pc8-vI-LkY"/>
+                            </connections>
                         </textField>
                     </subviews>
                 </stackView>
@@ -102,6 +105,9 @@
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="tel"/>
+                            <connections>
+                                <action selector="onPhoneChange:" destination="-1" eventType="editingChanged" id="3s3-Fr-lRl"/>
+                            </connections>
                         </textField>
                     </subviews>
                 </stackView>
@@ -122,6 +128,9 @@
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="onEmailChange:" destination="-1" eventType="editingChanged" id="7ds-BV-TbJ"/>
+                            </connections>
                         </textField>
                     </subviews>
                 </stackView>
