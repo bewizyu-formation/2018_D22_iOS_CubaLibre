@@ -31,6 +31,15 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        swipe.direction = UISwipeGestureRecognizer.Direction.down
+        swipe.cancelsTouchesInView = false
+        view.addGestureRecognizer(swipe)
+        
         self.profilePicker.delegate = self
         self.profilePicker.dataSource = self
         
@@ -40,6 +49,10 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
         self.initViewContent()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"delete"), style: .plain, target: self, action: #selector(onDeleteButtonPressed))
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -65,12 +78,11 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
             }) { (_) in
                 if(self.checkValidfields()){
                     let contactToUpdate = self.createContact()
-                    //self.updateContactOnCoreData(contactUpdated: contactToUpdate)
+                    self.updateContactOnCoreData(contactUpdated: contactToUpdate)
                     APIClient.instance.updateContact(token: getToken()!, contact: contactToUpdate, onSuccess: { (success) in
                         UIViewController.removeSpinner(spinner: loader)
                         DispatchQueue.main.async {
                             self.navigationController?.popToRootViewController(animated: true)
-                            //self.navigationController?.popViewController(animated: true)
                         }
                     }, onError: { (error) in
                         UIViewController.removeSpinner(spinner: loader)
