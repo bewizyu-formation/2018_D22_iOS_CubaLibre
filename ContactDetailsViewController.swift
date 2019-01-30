@@ -34,6 +34,7 @@ class ContactDetailsViewController: UIViewController, MFMessageComposeViewContro
     
     @IBAction func onEditButtonPressed() {
         let editContactController = EditContactViewController(nibName:nil, bundle: nil)
+        editContactController.contact = contact
         self.navigationController?.pushViewController(editContactController, animated: true)
     }
     
@@ -119,7 +120,19 @@ class ContactDetailsViewController: UIViewController, MFMessageComposeViewContro
         }
     }
     
+    func loadImageFromUrl(){
+        guard let imageUrl = contact.gravatar else{return}
+        guard let url = URL(string: imageUrl) else {return}
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else {return}
+            DispatchQueue.main.async {
+                self.gravatarView.image = UIImage(data: data)
+            }
+        }
+    }
+    
     func initViewContent() {
+        loadImageFromUrl()
         firstNameLabel.text = contact.firstName
         lastNameLabel.text = contact.lastName
         phoneLabel.text = contact.phone
