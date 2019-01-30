@@ -84,6 +84,27 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
         }
     }
     
+    func updateContactOnCoreData(contactUpdated : Contact){
+        
+        let context = getContext()!
+        
+        let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
+        fetchRequest.predicate = NSPredicate(format: "contactId == %@", contactUpdated.contactId!)
+        
+        let fetchedResults = try? context.fetch(fetchRequest)
+        if let contactToUpdate = fetchedResults?.first {
+            contactToUpdate.setValue(contactUpdated.firstName, forKey: "firstName")
+            contactToUpdate.setValue(contactUpdated.lastName, forKey: "lastName")
+            contactToUpdate.setValue(contactUpdated.phone, forKey: "phone")
+            contactToUpdate.setValue(contactUpdated.email, forKey: "email")
+            contactToUpdate.setValue(contactUpdated.profile, forKey: "profile")
+            contactToUpdate.setValue(contactUpdated.isFamilinkUser, forKey: "isFamilinkUser")
+            contactToUpdate.setValue(contactUpdated.isEmergencyUser, forKey: "isEmergencyUser")
+            
+            try? context.save()
+        }
+    }
+    
     @objc func onDeleteButtonPressed() {
         let alert = UIAlertController(title: "Confirmer la suppression", message: "Voulez-vous vraiment supprimer \(contact.firstName!) \(contact.lastName ?? "") ?", preferredStyle: .alert)
         
@@ -142,27 +163,6 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
             return nil
         }
         return appDelegate.persistentContainer.viewContext
-    }
-    
-    func updateContactOnCoreData(contactUpdated : Contact){
-
-        let context = getContext()!
-        
-        let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
-        fetchRequest.predicate = NSPredicate(format: "contactId == %@", contactUpdated.contactId!)
-        
-        let fetchedResults = try? context.fetch(fetchRequest)
-        if let contactToUpdate = fetchedResults?.first {
-            contactToUpdate.setValue(contactUpdated.firstName, forKey: "firstName")
-            contactToUpdate.setValue(contactUpdated.lastName, forKey: "lastName")
-            contactToUpdate.setValue(contactUpdated.phone, forKey: "phone")
-            contactToUpdate.setValue(contactUpdated.email, forKey: "email")
-            contactToUpdate.setValue(contactUpdated.profile, forKey: "profile")
-            contactToUpdate.setValue(contactUpdated.isFamilinkUser, forKey: "isFamilinkUser")
-            contactToUpdate.setValue(contactUpdated.isEmergencyUser, forKey: "isEmergencyUser")
-            
-            try? context.save()
-        }
     }
     
     func createErrorMessageAlert(title : String) {
