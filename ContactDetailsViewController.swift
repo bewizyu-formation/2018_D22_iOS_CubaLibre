@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-class ContactDetailsViewController: UIViewController {
+class ContactDetailsViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     @IBOutlet weak var gravatarView: UIImageView!
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var lastNameLabel: UILabel!
@@ -38,33 +38,84 @@ class ContactDetailsViewController: UIViewController {
     }
     
     @IBAction func onMessageButtonTap(_ sender: Any) {
+        UIView.animate(withDuration: -1, animations: {
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            self.messageButton.backgroundColor = .green
+            UIView.animate(withDuration: -1, animations: {
+                self.messageButton.backgroundColor = .rosyBrown
+            }) { (_) in
+                let messageVC = MFMessageComposeViewController()
+                
+                messageVC.body = "";
+                messageVC.recipients = ([self.contact.phone] as! [String])
+                messageVC.messageComposeDelegate = self
+                
+                if MFMessageComposeViewController.canSendText() {
+                    self.present(messageVC, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        switch (result) {
+        case .cancelled:
+            dismiss(animated: true, completion: nil)
+        case .failed:
+            print("Echec de l'envoi du message")
+            dismiss(animated: true, completion: nil)
+        case .sent:
+            print("Message envoyé")
+            dismiss(animated: true, completion: nil)
+        default:
+            break
+        }
     }
     
     @IBAction func onCallButtonTap(_ sender: Any) {
-        guard let number = URL(string: "tel://" + contact.phone!) else { return }
-        if (UIApplication.shared.canOpenURL(number)){
-            UIApplication.shared.open(number)
-        }
-        else {
-            let alert = UIAlertController(title: "Désolé !", message: "Votre téléphone ne supporte pas de passer des appels", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+        UIView.animate(withDuration: -1, animations: {
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            self.callButton.backgroundColor = .green
+            UIView.animate(withDuration: -1, animations: {
+                self.callButton.backgroundColor = .oldRose
+            }) { (_) in
+                guard let number = URL(string: "tel://" + self.contact.phone!) else { return }
+                if (UIApplication.shared.canOpenURL(number)){
+                    UIApplication.shared.open(number)
+                }
+                else {
+                    let alert = UIAlertController(title: "Désolé !", message: "Votre téléphone ne supporte pas de passer des appels", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
         }
     }
     
     @IBAction func onEmailButtonTap(_ sender: Any) {
-        if MFMailComposeViewController.canSendMail() {
-            guard let contactEmail = contact.email else {
-                return
+        UIView.animate(withDuration: -1, animations: {
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            self.emailButton.backgroundColor = .green
+            UIView.animate(withDuration: -1, animations: {
+                self.emailButton.backgroundColor = .rosyBrown
+            }) { (_) in
+                if MFMailComposeViewController.canSendMail() {
+                    guard let contactEmail = self.contact.email else {
+                        return
+                    }
+                    let mail = MFMailComposeViewController()
+                    mail.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
+                    mail.setToRecipients([contactEmail])
+                    self.present(mail, animated: true)
+                } else {
+                    let alert = UIAlertController(title: "Désolé !", message: "Votre téléphone ne supporte pas l'envoi d'email", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
-            mail.setToRecipients([contactEmail])
-            self.present(mail, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Désolé !", message: "Votre téléphone ne supporte pas l'envoi d'email", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
         }
     }
     
