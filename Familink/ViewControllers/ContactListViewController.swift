@@ -61,7 +61,7 @@ class ContactListViewController: UIViewController, NSFetchedResultsControllerDel
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterByName = searchText
+        filterByName = searchText.lowercased()
         filterContacts()
         refresh()
     }
@@ -70,7 +70,8 @@ class ContactListViewController: UIViewController, NSFetchedResultsControllerDel
     
     func filterContacts() {
         filteredContacts = contacts.filter {
-            if (filterByName != "" && !($0.firstName ?? "" + " " + ($0.lastName ?? "")).contains(filterByName)) {
+            let fullName = ($0.firstName?.lowercased() ?? "") + " " + ($0.lastName?.lowercased() ?? "")
+            if (filterByName != "" && !fullName.contains(filterByName)) {
                 return false
             }
             if (filterByCategory != "" && filterByCategory != "URGENCY" && filterByCategory != $0.profile) {
