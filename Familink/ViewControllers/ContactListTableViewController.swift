@@ -80,16 +80,21 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
         cell.contactLabelTitleView.backgroundColor = UIColor.seaShell
         cell.contactLabelTitle.textColor = UIColor.oldRose
         
-        guard let gravatar = contact.gravatar else {
-            return cell
+        DispatchQueue.global(qos: .background).async {
+            guard let gravatar = contact.gravatar else {
+                return
+            }
+            guard let url = URL(string: gravatar) else {
+                return
+            }
+            guard let data = try? Data(contentsOf: url) else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                cell.contactImage.image = UIImage(data: data)
+            }
         }
-        guard let url = URL(string: gravatar) else {
-            return cell
-        }
-        guard let data = try? Data(contentsOf: url) else {
-            return cell
-        }
-        cell.contactImage.image = UIImage(data: data)
 
         return cell
     }
