@@ -246,6 +246,7 @@
                         <outlet property="forgotPasswordButton" destination="bTX-9U-i1o" id="eMN-w2-uEP"/>
                         <outlet property="logInButton" destination="szS-NA-L76" id="3ps-g7-Oqs"/>
                         <outlet property="loginTextField" destination="JZD-QI-ZIi" id="3oe-6R-qDE"/>
+                        <outlet property="loginTopConstraint" destination="4IL-Oj-oWp" id="lBR-12-3Ww"/>
                         <outlet property="passwordTextField" destination="U0i-N0-8p8" id="4p5-p5-kqh"/>
                         <outlet property="signUpButton" destination="k09-Ut-Gxy" id="s6j-n8-1rt"/>
                     </connections>

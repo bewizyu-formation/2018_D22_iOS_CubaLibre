@@ -15,7 +15,7 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var forgotPasswordButton: UIButton!
-    @IBOutlet weak var loginBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var loginTopConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +58,7 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
                     UIView.animate(withDuration: 2, animations: {
                         self.logInButton.setTitle("Connecté", for: .normal)
                         self.logInButton.backgroundColor = .green
-                        //self.loginBottomConstraint.constant = 0
+                        self.loginTopConstraint.constant = 120
                         UIView.animate(withDuration: 2, animations: {
                             self.loginTextField.isHidden = true
                             self.passwordTextField.isHidden = true
@@ -86,11 +86,10 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func onDidUserDisconnect(_ notification:Notification) {
-        print("disconnet")
         self.navigationController?.isNavigationBarHidden = true
         self.logInButton.backgroundColor = UIColor.rosyBrown
         self.logInButton.setTitle("Se connecter", for: .normal)
-        self.loginBottomConstraint.constant = 120
+        self.loginTopConstraint.constant = 32
         
         self.loginTextField.isHidden = false
         self.passwordTextField.isHidden = false
