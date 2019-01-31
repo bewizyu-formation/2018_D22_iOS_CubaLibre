@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class EditUserViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
 
@@ -173,12 +174,8 @@ class EditUserViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
         
         if error == false {
-            if let token = getToken() {
-                
-                _ = APIClient.instance.updateUser(token: token, user: user, onSuccess: onUpdateUserSuccess, onError: onUpdateUserError)
-            }
             navigationController?.popViewController(animated: true)
-        }
+            }
         
         UIView.animate(withDuration: -1, animations: {
             self.view.layoutIfNeeded()
@@ -190,19 +187,6 @@ class EditUserViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
         
     }
-    
-    func onUpdateUserSuccess (user: User) {
-        DispatchQueue.main.async {
-
-        }
-    }
-    
-    func onUpdateUserError (message: String) {
-        let alert = UIAlertController(title: "Erreur", message: "Utilisateur non récupéré", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     
     func isValidMail(value: String) -> Bool {
         let mailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
