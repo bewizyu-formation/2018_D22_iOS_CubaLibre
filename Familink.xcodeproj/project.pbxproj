@@ -19,6 +19,8 @@
 		1CA2F3E22200938300349D99 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA2F3E12200938300349D99 /* edit.png */; };
 		1CA8927621FF05520087D393 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8927521FF05520087D393 /* Colors.swift */; };
 		1CA8927B21FF41470087D393 /* LoaderScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8927A21FF41470087D393 /* LoaderScreen.swift */; };
+		BC16F5CC2201DE8400C15CB2 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC16F5CB2201DE8400C15CB2 /* ContactListViewController.swift */; };
+		BC16F5CE2201E4E700C15CB2 /* ContactsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC16F5CD2201E4E700C15CB2 /* ContactsListTableViewController.swift */; };
 		BC49D04622006A1600378D1C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC49D04522006A1500378D1C /* Helper.swift */; };
 		BC49D04A22006D5C00378D1C /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = BC49D04722006D5C00378D1C /* profile.png */; };
 		BC49D04B22006D5C00378D1C /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = BC49D04822006D5C00378D1C /* logout.png */; };
@@ -80,6 +82,8 @@
 		1CA2F3E12200938300349D99 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		1CA8927521FF05520087D393 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1CA8927A21FF41470087D393 /* LoaderScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderScreen.swift; sourceTree = "<group>"; };
+		BC16F5CB2201DE8400C15CB2 /* ContactListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
+		BC16F5CD2201E4E700C15CB2 /* ContactsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactsListTableViewController.swift; path = ViewControllers/ContactsListTableViewController.swift; sourceTree = "<group>"; };
 		BC49D04522006A1500378D1C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		BC49D04722006D5C00378D1C /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
 		BC49D04822006D5C00378D1C /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 				1C2F4B6721F89FB100D4B9FC /* AppDelegate.swift */,
 				1C2F4B6921F89FB100D4B9FC /* ViewController.swift */,
 				1C2F4B6B21F89FB100D4B9FC /* Main.storyboard */,
+				BC16F5CD2201E4E700C15CB2 /* ContactsListTableViewController.swift */,
 				1C2F4B7121F89FB200D4B9FC /* Assets.xcassets */,
 				1C2F4B7321F89FB200D4B9FC /* LaunchScreen.storyboard */,
 				1C2F4B7621F89FB200D4B9FC /* Info.plist */,
@@ -245,6 +250,7 @@
 				BC8D5C7921FA202200A20B93 /* LoginUIViewController.swift */,
 				BC733AFE21FB410F00BC110F /* ContactTableViewCell.swift */,
 				BC733AE221FB0C4300BC110F /* ContactListTableViewController.swift */,
+				BC16F5CB2201DE8400C15CB2 /* ContactListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -424,12 +430,14 @@
 				BC733AEA21FB280800BC110F /* AddContactViewController.swift in Sources */,
 				BC49D04622006A1600378D1C /* Helper.swift in Sources */,
 				BC733AF221FB285700BC110F /* EditUserViewController.swift in Sources */,
+				BC16F5CC2201DE8400C15CB2 /* ContactListViewController.swift in Sources */,
 				1C2F4B6A21F89FB100D4B9FC /* ViewController.swift in Sources */,
 				1C2F4B7021F89FB100D4B9FC /* Familink.xcdatamodeld in Sources */,
 				BC8D5C7521FA1D3400A20B93 /* SignUpViewController.swift in Sources */,
 				BC733AE621FB279A00BC110F /* UserDetailsViewController.swift in Sources */,
 				1C2F4B6821F89FB100D4B9FC /* AppDelegate.swift in Sources */,
 				1C6AA2F921F9EDA70036C997 /* APIClient.swift in Sources */,
+				BC16F5CE2201E4E700C15CB2 /* ContactsListTableViewController.swift in Sources */,
 				BC733AF621FB2C8F00BC110F /* EditContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
