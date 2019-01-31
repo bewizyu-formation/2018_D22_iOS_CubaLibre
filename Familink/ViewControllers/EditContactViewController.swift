@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var firstNameTextInput: UITextField!
     @IBOutlet weak var lastNameLabel: UILabel!
@@ -31,17 +31,15 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-        
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        swipe.direction = UISwipeGestureRecognizer.Direction.down
-        swipe.cancelsTouchesInView = false
-        view.addGestureRecognizer(swipe)
+        self.hideKeyboardGesture()
         
         self.profilePicker.delegate = self
         self.profilePicker.dataSource = self
+        
+        firstNameTextInput.delegate = self
+        lastNameTextInput.delegate = self
+        phoneTextInput.delegate = self
+        emailTextInput.delegate = self
         
         profilePickerData = ["Famille", "Senior", "Médecin"]
         
@@ -51,8 +49,17 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"delete"), style: .plain, target: self, action: #selector(onDeleteButtonPressed))
     }
     
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let nextTag = textField.tag + 1
+        
+        if let nextResponder = view.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
