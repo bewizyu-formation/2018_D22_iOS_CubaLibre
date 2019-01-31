@@ -131,8 +131,6 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                 user.firstName = firstnameTextField.text
                 user.email = mailTextField.text
                 
-                print(profile)
-                
                 APIClient.instance.addUser(user: user, password: password, onSuccess: onAddUserSuccess, onError: onAddUserError)
             }
         }

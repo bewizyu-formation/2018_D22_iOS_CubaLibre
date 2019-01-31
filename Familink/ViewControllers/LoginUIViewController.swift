@@ -22,6 +22,9 @@ class LoginUIViewController: UIViewController {
         
         self.initViewUI()
         NotificationCenter.default.addObserver(self, selector: #selector(onDidUserDisconnect(_:)), name: .didUserDisconnect, object: nil)
+        
+        loginTextField.text = "0766666666"
+        passwordTextField.text = "6666"
     }
     
     override func viewWillAppear(_ animated: Bool) {

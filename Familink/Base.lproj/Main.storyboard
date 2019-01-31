@@ -11,55 +11,135 @@
     </dependencies>
     <scenes>
         <!--Mes contacts-->
-        <scene sceneID="aEt-rG-UWh">
+        <scene sceneID="Suv-0g-UpF">
             <objects>
-                <tableViewController storyboardIdentifier="ContactListTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pbF-Pb-OY3" customClass="ContactListTableViewController" customModule="Familink" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fcU-Wx-bOJ">
+                <viewController id="Qlb-OD-eLe" customClass="ContactListViewController" customModule="Familink" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YmT-ZU-dMY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MCe-Aq-78N">
+                                <rect key="frame" x="0.0" y="64" width="375" height="583"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0o4-5f-IYw">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="583"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="VLf-5x-Jij">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rN7-O7-DSt">
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
+                                                        <state key="normal" title="Tous"/>
+                                                        <connections>
+                                                            <action selector="onAllFilterPressed:" destination="Qlb-OD-eLe" eventType="touchUpInside" id="hcM-RQ-2wA"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnr-7Z-icx">
+                                                        <rect key="frame" x="75" y="0.0" width="75" height="30"/>
+                                                        <state key="normal" title="Famille"/>
+                                                        <connections>
+                                                            <action selector="onFamilyFilterPressed:" destination="Qlb-OD-eLe" eventType="touchUpInside" id="3Pg-kw-C8y"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQt-St-hSI">
+                                                        <rect key="frame" x="150" y="0.0" width="75" height="30"/>
+                                                        <state key="normal" title="Senior"/>
+                                                        <connections>
+                                                            <action selector="onSeniorFilterPressed:" destination="Qlb-OD-eLe" eventType="touchUpInside" id="2ws-HE-BhV"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWL-Vb-VkL">
+                                                        <rect key="frame" x="225" y="0.0" width="75" height="30"/>
+                                                        <state key="normal" title="Médecin"/>
+                                                        <connections>
+                                                            <action selector="onMedicFilterPressed:" destination="Qlb-OD-eLe" eventType="touchUpInside" id="Ofs-3B-j8c"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9M-JA-yzP">
+                                                        <rect key="frame" x="300" y="0.0" width="75" height="30"/>
+                                                        <state key="normal" title="Urgence"/>
+                                                        <connections>
+                                                            <action selector="onUrgencyFilterPressed:" destination="Qlb-OD-eLe" eventType="touchUpInside" id="fz9-M6-bIb"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="D9x-GP-ltw">
+                                                <rect key="frame" x="0.0" y="30" width="375" height="56"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </searchBar>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tde-8H-LE5">
+                                                <rect key="frame" x="0.0" y="86" width="375" height="497"/>
+                                                <connections>
+                                                    <segue destination="f1t-aZ-ScO" kind="embed" id="WUW-Fb-U9A"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Mty-qo-pW0">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mty-qo-pW0" id="X92-lM-VQE">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOk-SN-XM6">
-                                            <rect key="frame" x="154" y="6" width="40" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Detail"/>
-                                        </button>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="pbF-Pb-OY3" id="dGc-y2-tBz"/>
-                            <outlet property="delegate" destination="pbF-Pb-OY3" id="lah-L6-FeO"/>
-                        </connections>
-                    </tableView>
+                        <constraints>
+                            <constraint firstItem="MCe-Aq-78N" firstAttribute="top" secondItem="zi9-Uu-foS" secondAttribute="top" id="75r-h8-Me9"/>
+                            <constraint firstItem="zi9-Uu-foS" firstAttribute="trailing" secondItem="MCe-Aq-78N" secondAttribute="trailing" id="Kdz-hR-bLE"/>
+                            <constraint firstItem="zi9-Uu-foS" firstAttribute="bottom" secondItem="MCe-Aq-78N" secondAttribute="bottom" id="e2c-yX-DrE"/>
+                            <constraint firstItem="MCe-Aq-78N" firstAttribute="leading" secondItem="zi9-Uu-foS" secondAttribute="leading" id="iih-fB-F6U"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zi9-Uu-foS"/>
+                    </view>
                     <navigationItem key="navigationItem" title="Mes contacts" id="lv9-3h-Vjc">
                         <rightBarButtonItems>
                             <barButtonItem title="User" image="profile.png" id="Hi5-pi-m89">
                                 <color key="tintColor" red="0.49803921568627452" green="0.32941176470588235" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="onUserButtonPressed:" destination="pbF-Pb-OY3" id="Opg-hr-A3w"/>
+                                    <action selector="onProfileButtonPressed:" destination="Qlb-OD-eLe" id="goJ-eU-i1Z"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Ajout" image="newContact.png" id="OgC-Be-Dae">
                                 <color key="tintColor" red="0.49803921568627452" green="0.32941176470588235" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="addContactButtonPressed:" destination="pbF-Pb-OY3" id="YHh-yQ-fSO"/>
+                                    <action selector="onAddContactButtonPressed:" destination="Qlb-OD-eLe" id="dy6-1T-ivW"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gjy-Xr-rHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <connections>
+                        <outlet property="containerView" destination="Tde-8H-LE5" id="ZI0-lB-7gd"/>
+                        <outlet property="searchBar" destination="D9x-GP-ltw" id="0qs-Lg-pIW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Osb-tn-Sft" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1380" y="-833.43328335832086"/>
+            <point key="canvasLocation" x="1455" y="-904"/>
+        </scene>
+        <!--Contact List Table View Controller-->
+        <scene sceneID="IrY-zy-WoK">
+            <objects>
+                <tableViewController id="f1t-aZ-ScO" customClass="ContactListTableViewController" customModule="Familink" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="n33-z9-azH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="497"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="SYi-Aq-YzT">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SYi-Aq-YzT" id="iT4-mb-fyX">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="f1t-aZ-ScO" id="4tg-8J-kN7"/>
+                            <outlet property="delegate" destination="f1t-aZ-ScO" id="BXV-hs-gpD"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G4j-e1-iE4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2217" y="-972"/>
         </scene>
         <!--ContactsUI Navigation Controller-->
         <scene sceneID="jfw-Vz-NgS">
@@ -70,7 +150,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="pbF-Pb-OY3" kind="relationship" relationship="rootViewController" id="VOc-Aw-CDE"/>
+                        <segue destination="Qlb-OD-eLe" kind="relationship" relationship="rootViewController" id="aB0-Pw-s7F"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXj-ss-3lZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -169,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vaY-m3-4bL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1340" y="-134.48275862068968"/>
+            <point key="canvasLocation" x="1454" y="-134"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -239,8 +319,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="logo" width="52.560001373291016" height="56.880001068115234"/>
         <image name="newContact.png" width="30" height="30"/>
         <image name="profile.png" width="32" height="32"/>
-        <image name="logo" width="52.560001373291016" height="56.880001068115234"/>
     </resources>
 </document>
