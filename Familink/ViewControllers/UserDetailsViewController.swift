@@ -97,7 +97,8 @@ class UserDetailsViewController: UIViewController {
                 self.disconnectButton.backgroundColor = .rosyBrown
             })
         }
-    NotificationCenter.default.post(name: .didUserDisconnect, object: nil)
+        self.navigationController?.popToRootViewController(animated: true)
+        NotificationCenter.default.post(name: .didUserDisconnect, object: nil)
     }
     
     /*

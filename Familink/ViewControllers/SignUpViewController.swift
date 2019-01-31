@@ -149,7 +149,8 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
             
             _ = APIClient.instance.getToken(login: user.phone ?? "", password: password, onSuccess: { (token : String) in
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .didUserConnect, object: nil)
+                    self.navigationController?.popToRootViewController(animated: true)
+                    //NotificationCenter.default.post(name: .didUserConnect, object: nil)
                 }
             }, onError: { (errorMessage : String) in
                 DispatchQueue.main.async {

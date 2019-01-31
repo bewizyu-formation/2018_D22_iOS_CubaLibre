@@ -111,6 +111,8 @@ class ContactListViewController: UIViewController, NSFetchedResultsControllerDel
         
         tableView.tableView.backgroundColor = UIColor.seaShell
         getContactsFromCoreData()
+        searchBar.backgroundColor = .seaShell
+
     }
     
     // Contacts to & from coredata
