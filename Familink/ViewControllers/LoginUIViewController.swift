@@ -58,7 +58,7 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
                     UIView.animate(withDuration: 2, animations: {
                         self.logInButton.setTitle("Connecté", for: .normal)
                         self.logInButton.backgroundColor = .green
-                        self.loginBottomConstraint.constant = 0
+                        //self.loginBottomConstraint.constant = 0
                         UIView.animate(withDuration: 2, animations: {
                             self.loginTextField.isHidden = true
                             self.passwordTextField.isHidden = true
