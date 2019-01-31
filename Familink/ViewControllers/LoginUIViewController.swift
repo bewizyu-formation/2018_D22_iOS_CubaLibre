@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LoginUIViewController: UIViewController {
+class LoginUIViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var logInButton: UIButton!
@@ -19,6 +19,9 @@ class LoginUIViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginTextField.delegate = self
+        passwordTextField.delegate = self
         
         self.initViewUI()
         NotificationCenter.default.addObserver(self, selector: #selector(onDidUserDisconnect(_:)), name: .didUserDisconnect, object: nil)
@@ -101,12 +104,10 @@ class LoginUIViewController: UIViewController {
         self.loginTextField.textColor = .rosyBrown
         self.loginTextField.layer.borderColor = UIColor.rosyBrown.cgColor
         self.loginTextField.layer.borderWidth = 1.0
-        //self.loginTextField.layer.cornerRadius = self.loginTextField.frame.height/2
         
         self.passwordTextField.textColor = .rosyBrown
         self.passwordTextField.layer.borderColor = UIColor.rosyBrown.cgColor
         self.passwordTextField.layer.borderWidth = 1.0
-        //self.passwordTextField.layer.cornerRadius = self.passwordTextField.frame.height/2
         
         self.logInButton.layer.cornerRadius = logInButton.frame.height/2
         self.logInButton.backgroundColor = .oldRose
@@ -142,14 +143,16 @@ class LoginUIViewController: UIViewController {
         return appDelegate.persistentContainer.viewContext
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let nextTag = textField.tag + 1
+        
+        if let nextResponder = view.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
     }
-    */
-
 }
