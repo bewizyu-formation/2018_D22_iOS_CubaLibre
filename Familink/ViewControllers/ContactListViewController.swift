@@ -123,7 +123,7 @@ class ContactListViewController: UIViewController, NSFetchedResultsControllerDel
         let context = appDelegate.persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true)]
         
         let resultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -170,8 +170,7 @@ class ContactListViewController: UIViewController, NSFetchedResultsControllerDel
             
             contacts = contactList
             
-            self.tableView.contacts = self.contacts
-            self.tableView.tableView.reloadData()
+            getContactsFromCoreData() // permet de filtrer par ordre alphabétique
         }
     }
 
