@@ -1,70 +1,34 @@
 //
-//  ContactListTableViewController.swift
+//  ContactsListTableViewController.swift
 //  Familink
 //
-//  Created by formation 1 on 25/01/2019.
+//  Created by formation 1 on 30/01/2019.
 //  Copyright © 2019 CubaLibre. All rights reserved.
 //
 
 import UIKit
 import MessageUI
-import CoreData
 
-class ContactListTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class ContactsListTableViewController: UITableViewController {
 
     var contacts = [Contact]()
-    var fetchedResultController: NSFetchedResultsController<Contact>?
-    @IBOutlet var searchBar: UITableView!
-
-    // initialize
-
-    func refresh() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    
-    func getContext() -> NSManagedObjectContext? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return nil
-        }
-        return appDelegate.persistentContainer.viewContext
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
-        self.tableView.register(UINib(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: "ContactTableViewCell")
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tableView.backgroundColor = UIColor.seaShell
-    }
-    
-    @IBAction func onUserButtonPressed(_ sender: Any) {
-        let userDetailsController = UserDetailsViewController(nibName:nil, bundle: nil)
-        self.navigationController?.pushViewController(userDetailsController, animated: true)
-    }
-    
-    @IBAction func addContactButtonPressed(_ sender: Any) {
-        let addContactController = AddContactViewController(nibName:nil, bundle: nil)
-        self.navigationController?.pushViewController(addContactController, animated: true)
-    }
-    
-    @IBAction func onDisconnectButtonPress(_ sender: Any) {
-        NotificationCenter.default.post(name: .didUserDisconnect, object: nil)
-    }
-    
     // tableview
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contacts.count
     }
@@ -72,7 +36,7 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell", for: indexPath) as! ContactTableViewCell
         let contact = contacts[indexPath.row]
-
+        
         cell.contactLabelTitle.text = (contact.firstName ?? "") + " " + (contact.lastName ?? "")
         cell.contactLabelTitle.layoutMargins = UIEdgeInsets(top: 0, left: 75, bottom: 0, right: 0)
         cell.backgroundColor = UIColor.seaShell
@@ -89,15 +53,15 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
             return cell
         }
         cell.contactImage.image = UIImage(data: data)
-
+        
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ContactDetailsViewController(nibName:nil, bundle: nil)
         let contact = contacts[indexPath.row]
         vc.contact = contact //contacts[indexPath.row]
-
+        
         
         self.show(vc, sender: self)
     }
@@ -125,7 +89,7 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
             if MFMailComposeViewController.canSendMail() {
                 
                 guard let contactEmail = self.contacts[index[1]].email else { return }
-
+                
                 let mail = MFMailComposeViewController()
                 mail.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
                 mail.setToRecipients([contactEmail])
@@ -138,9 +102,9 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
             }
         }
         mail.backgroundColor = .orange
-
+        
         return [call, mail]
-
+        
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
