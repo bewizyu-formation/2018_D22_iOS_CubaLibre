@@ -133,8 +133,8 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
             let loader = UIViewController.displaySpinner(onView: self.view)
             APIClient.instance.deleteContact(token: getToken()!, contactId: self.contact.contactId!, onSuccess: { (success) in
                 UIViewController.removeSpinner(spinner: loader)
-                self.deleteOnCoreData()
                 DispatchQueue.main.async {
+                    self.deleteOnCoreData()
                     self.navigationController?.popToRootViewController(animated: true)
                 }
             }, onError: { (erreur) in

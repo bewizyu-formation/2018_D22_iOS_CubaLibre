@@ -94,6 +94,8 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
         self.forgotPasswordButton.isHidden = false
         self.signUpButton.isHidden = false
         
+        loginTextField.text = ""
+        passwordTextField.text = ""
         self.navigationController?.popToRootViewController(animated: false)
     }
     

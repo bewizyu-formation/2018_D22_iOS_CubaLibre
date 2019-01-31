@@ -31,7 +31,7 @@ class UserDetailsViewController: UIViewController {
         self.initViewContent()
         self.hideKeyboardGesture()
         self.initViewUI()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"edit"), style: .plain, target: self, action: #selector(onEditButtonPressed))
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"edit"), style: .plain, target: self, action: #selector(onEditButtonPressed))
         
     }
     
@@ -97,7 +97,7 @@ class UserDetailsViewController: UIViewController {
                 self.disconnectButton.backgroundColor = .rosyBrown
             })
         }
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: false)
         NotificationCenter.default.post(name: .didUserDisconnect, object: nil)
     }
     
