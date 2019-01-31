@@ -20,6 +20,7 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardGesture()
         loginTextField.delegate = self
         passwordTextField.delegate = self
         

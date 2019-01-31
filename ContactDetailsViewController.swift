@@ -30,6 +30,7 @@ class ContactDetailsViewController: UIViewController, MFMessageComposeViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initViewContent()
+        self.hideKeyboardGesture()
         self.initViewUI()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"edit"), style: .plain, target: self, action: #selector(onEditButtonPressed))
     }

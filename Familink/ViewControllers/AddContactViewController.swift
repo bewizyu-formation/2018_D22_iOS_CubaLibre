@@ -33,6 +33,7 @@ class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         self.profilePicker.delegate = self
         self.profilePicker.dataSource = self
+        self.hideKeyboardGesture()
         
         profilePickerData = ["Famille", "Senior", "Médecin"]
         

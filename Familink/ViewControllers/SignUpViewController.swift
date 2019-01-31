@@ -38,6 +38,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     override func viewDidLoad() {
         super.viewDidLoad()
         let pickerView = UIPickerView()
+        self.hideKeyboardGesture()
         pickerView.delegate = self
         pickerTextField.inputView = pickerView
         

@@ -12,6 +12,8 @@ class ForgottenPasswordViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.hideKeyboardGesture()
 
         // Do any additional setup after loading the view.
     }
