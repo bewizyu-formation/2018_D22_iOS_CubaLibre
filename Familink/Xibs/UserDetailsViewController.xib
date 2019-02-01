@@ -103,6 +103,14 @@
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="tsb-ex-L70" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="PN8-K1-jNL"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NqZ-zg-QnT" secondAttribute="trailing" constant="20" id="Z3P-KX-xoD"/>
+                <constraint firstItem="tsb-ex-L70" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ewB-NG-T3X"/>
+                <constraint firstItem="NqZ-zg-QnT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="hEH-Xa-iN8"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tsb-ex-L70" secondAttribute="trailing" constant="20" id="oiA-rD-FzN"/>
+                <constraint firstItem="NqZ-zg-QnT" firstAttribute="top" secondItem="tsb-ex-L70" secondAttribute="bottom" constant="24" id="qJM-ET-oRT"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="78.75" y="51.760563380281688"/>
         </view>

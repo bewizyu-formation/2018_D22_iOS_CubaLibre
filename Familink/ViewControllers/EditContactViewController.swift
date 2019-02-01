@@ -74,6 +74,33 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
         return profilePickerData[row]
     }
 
+    func editCoreDataObject(contactToUpdate : Contact) {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let context : NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Contact")
+        let predicate = NSPredicate(format: "contactId = %@", argumentArray: [contactToUpdate.contactId ?? ""]) // Specify your condition here
+
+        fetch.predicate = predicate
+        
+        do {
+            
+            let result = try context.fetch(fetch)
+            for data in result as! [NSManagedObject] {
+                print(data.value(forKey: "username") as! String)
+                print(data.value(forKey: "password") as! String)
+                print(data.value(forKey: "age") as! String)
+            }
+        } catch {
+            print("Failed")
+        }
+        
+        try? context.save()
+    }
+    
     @IBAction func onValidateButtonPressed(_ sender: Any) {
         //let loader = UIViewController.displaySpinner(onView: self.view)
         UIView.animate(withDuration: -1, animations: {
@@ -85,9 +112,8 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
             }) { (_) in
                 if(self.checkValidfields()){
                     let contactToUpdate = self.createContact()
-                    self.updateContactOnCoreData(contactUpdated: contactToUpdate)
                     APIClient.instance.updateContact(token: getToken()!, contact: contactToUpdate, onSuccess: { (success) in
-                        //UIViewController.removeSpinner(spinner: loader)
+                        self.updateContactOnCoreData(contactUpdated: contactToUpdate)
                         DispatchQueue.main.async {
                             self.navigationController?.popToRootViewController(animated: true)
                         }
@@ -105,22 +131,26 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     func updateContactOnCoreData(contactUpdated : Contact){
         
-        let context = getContext()!
-        
-        let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
-        fetchRequest.predicate = NSPredicate(format: "contactId == %@", contactUpdated.contactId!)
-        
-        let fetchedResults = try? context.fetch(fetchRequest)
-        if let contactToUpdate = fetchedResults?.first {
-            contactToUpdate.setValue(contactUpdated.firstName, forKey: "firstName")
-            contactToUpdate.setValue(contactUpdated.lastName, forKey: "lastName")
-            contactToUpdate.setValue(contactUpdated.phone, forKey: "phone")
-            contactToUpdate.setValue(contactUpdated.email, forKey: "email")
-            contactToUpdate.setValue(contactUpdated.profile, forKey: "profile")
-            contactToUpdate.setValue(contactUpdated.isFamilinkUser, forKey: "isFamilinkUser")
-            contactToUpdate.setValue(contactUpdated.isEmergencyUser, forKey: "isEmergencyUser")
+        DispatchQueue.main.async {
+            let context = self.getContext()!
             
-            try? context.save()
+            let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
+            fetchRequest.predicate = NSPredicate(format: "contactId == %@", contactUpdated.contactId!)
+            
+            let fetchedResults : [Contact]? = try? context.fetch(fetchRequest)
+            if let contactToUpdate = fetchedResults?.first {
+                contactToUpdate.firstName = contactUpdated.firstName
+                contactToUpdate.lastName = contactUpdated.lastName
+                contactToUpdate.phone = contactUpdated.phone
+                contactToUpdate.email = contactUpdated.email
+                contactToUpdate.profile = contactUpdated.profile
+                contactToUpdate.isFamilinkUser = contactUpdated.isFamilinkUser
+                contactToUpdate.isEmergencyUser = contactUpdated.isEmergencyUser
+                
+                context.delete(contactUpdated)
+
+                try? context.save()
+            }
         }
     }
     
@@ -130,9 +160,7 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
         alert.addAction(UIAlertAction(title: "Annuler", style: .default, handler: nil))
         
         let validateDelete = UIAlertAction(title: "Supprimer", style: .destructive) { (action:UIAlertAction) in
-            //let loader = UIViewController.displaySpinner(onView: self.view)
             APIClient.instance.deleteContact(token: getToken()!, contactId: self.contact.contactId!, onSuccess: { (success) in
-                //UIViewController.removeSpinner(spinner: loader)
                 DispatchQueue.main.async {
                     self.deleteOnCoreData()
                     self.navigationController?.popToRootViewController(animated: true)
@@ -149,16 +177,18 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     func deleteOnCoreData(){
-        let context = getContext()!
-        
-        let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
-        fetchRequest.predicate = NSPredicate(format: "contactId == %@", self.contact.contactId!)
-        
-        let fetchedResults = try? context.fetch(fetchRequest)
-        if let contactToDelete = fetchedResults?.first {
-            context.delete(contactToDelete)
+        DispatchQueue.main.async {
+            let context = self.getContext()!
             
-            try? context.save()
+            let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
+            fetchRequest.predicate = NSPredicate(format: "contactId == %@", self.contact.contactId!)
+            
+            let fetchedResults = try? context.fetch(fetchRequest)
+            if let contactToDelete = fetchedResults?.first {
+                context.delete(contactToDelete)
+                
+                try? context.save()
+            }
         }
     }
     
