@@ -18,6 +18,7 @@ class APIClient {
     private let UPDATE_USER_URI = "secured/users"
     private let CURRENT_USER_URI = "secured/users/current"
     private let CONTACT_URI = "secured/users/contacts/"
+    private let FORGOT_PASSWORD = "public/forgot-password"
     private let TOKEN = "token"
     private let PHONE = "phone"
     private let PASSWORD = "password"
@@ -68,8 +69,18 @@ class APIClient {
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
+        
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 200){
                     if let dataResponse = data {
                         if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [Any] {
@@ -99,7 +110,13 @@ class APIClient {
                         onError("Erreur inconnue")
                     }
                 } else {
-                    onError(self.getError(data: data))
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
                 }
             }
         }
@@ -117,12 +134,27 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 200){
                     onSuccess("Contact ajouté")
                 } else {
-                    onError(self.getError(data: data))
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
                 }
             }
         }
@@ -140,12 +172,27 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 204){
                     onSuccess("Contact modifié")
                 } else {
-                    onError(self.getError(data: data))
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
                 }
             }
         }
@@ -160,12 +207,27 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 204){
                     onSuccess("Contact supprimé")
                 } else {
-                    onError(self.getError(data: data))
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
                 }
             }
         }
@@ -224,12 +286,27 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 200){
                     onSuccess("User modifié")
                 } else {
-                    onError(self.getError(data: data))
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
                 }
             }
         }
@@ -244,8 +321,17 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 200){
                     if let dataResponse = data {
                         if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [String: String] {
@@ -262,6 +348,35 @@ class APIClient {
                     } else {
                         onError("Erreur inconnue")
                     }
+                } else {
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
+                }
+            }
+        }
+        task.resume()
+        
+        return task
+    }
+    
+    func forgotPassword(phone : String, onSuccess: @escaping (String) -> (), onError: @escaping (String) -> ()) -> URLSessionTask {
+        let json : [String: Any] = [self.PHONE : phone]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        var request = URLRequest(url: URL(string: "\(BASE_URL)\(FORGOT_PASSWORD)")! )
+        request.httpMethod = "POST"
+        request.httpBody = jsonData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                if(httpResponse.statusCode == 204){
+                    onSuccess("Vous recevrez votre nouveau mot de passe par mail")
                 } else {
                     onError(self.getError(data: data))
                 }

@@ -91,18 +91,18 @@ class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPicker
             contact.isEmergencyUser = isEmergencyUserSwitch.isOn
             
             if let token = getToken() {
-                let loader = UIViewController.displaySpinner(onView: self.view)
+                //let loader = UIViewController.displaySpinner(onView: self.view)
                 
                 context.insert(contact)
                 try? context.save()
                 
                 _ = APIClient.instance.addContact(token: token, contact: contact, onSuccess: { (_) in
-                    UIViewController.removeSpinner(spinner: loader)
+                   // UIViewController.removeSpinner(spinner: loader)
                     DispatchQueue.main.async {
                         self.navigationController?.popViewController(animated: true)
                     }
                 }) { (error) in
-                    UIViewController.removeSpinner(spinner: loader)
+                    //UIViewController.removeSpinner(spinner: loader)
                     let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                     self.present(alert, animated: true)

@@ -9,24 +9,59 @@
 import UIKit
 
 class ForgottenPasswordViewController: UIViewController {
-
+    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var resetPasswordButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.initViewUI()
         self.hideKeyboardGesture()
-
-        // Do any additional setup after loading the view.
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func onResetPasswordTap(_ sender: Any) {
+        
+        UIView.animate(withDuration: -1, animations: {
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            APIClient.instance.forgotPassword(phone: self.phoneTextField.text ?? "", onSuccess: { (success) in
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: -1, animations: {
+                        self.resetPasswordButton.backgroundColor = .green
+                        UIView.animate(withDuration: -1, animations: {
+                            self.resetPasswordButton.backgroundColor = .oldRose
+                            let alert = UIAlertController(title: success, message: "", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                            self.present(alert, animated: true)
+                        })
+                    })
+                }
+            }, onError: { (error) in
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: -1, animations: {
+                        let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self.present(alert, animated: true)
+                    })
+                }
+            })
+        }
     }
-    */
-
+    
+    func initViewUI() {
+        self.view.backgroundColor = .seaShell
+        
+        self.infoLabel.textColor = .rosyBrown
+        
+        self.phoneTextField.textColor = .rosyBrown
+        self.phoneTextField.layer.borderColor = UIColor.rosyBrown.cgColor
+        self.phoneTextField.layer.borderWidth = 1.0
+        
+        self.resetPasswordButton.layer.cornerRadius = resetPasswordButton.frame.height/2
+        self.resetPasswordButton.backgroundColor = .oldRose
+        self.resetPasswordButton.setTitleColor(.seaShell, for: .normal)
+        self.resetPasswordButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        self.resetPasswordButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        self.resetPasswordButton.layer.shadowOpacity = 1.0
+    }
 }

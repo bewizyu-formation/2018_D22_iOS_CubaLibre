@@ -26,6 +26,7 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
         
         self.initViewUI()
         NotificationCenter.default.addObserver(self, selector: #selector(onDidUserDisconnect(_:)), name: .didUserDisconnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onTokenExpired(_:)), name: .onTokenExpired, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,14 +46,14 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onLoginButtonTap(_ sender: Any) {
-        let loader = UIViewController.displaySpinner(onView: self.view)
+        //let loader = UIViewController.displaySpinner(onView: self.view)
         
         UIView.animate(withDuration: -1, animations: {
             self.view.layoutIfNeeded()
         }) { (_) in
             APIClient.instance.getToken(login: self.loginTextField.text ?? "", password: self.passwordTextField.text ?? "", onSuccess: { (token) in
                 DispatchQueue.main.async {
-                    UIViewController.removeSpinner(spinner: loader)
+                    //UIViewController.removeSpinner(spinner: loader)
                     UIView.animate(withDuration: 2, animations: {
                         self.logInButton.setTitle("Connecté", for: .normal)
                         self.logInButton.backgroundColor = .green
@@ -70,7 +71,7 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
                 }
             }) { (error) in
                 DispatchQueue.main.async {
-                    UIViewController.removeSpinner(spinner: loader)
+                    //UIViewController.removeSpinner(spinner: loader)
                     UIView.animate(withDuration: -1, animations: {
                         self.logInButton.setTitle("Réessayer", for: .normal)
                         self.logInButton.backgroundColor = .red
@@ -84,6 +85,14 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func onDidUserDisconnect(_ notification:Notification) {
+        resetViewUI()
+    }
+    
+    @objc func onTokenExpired(_ notification:Notification) {
+        resetViewUI()
+    }
+    
+    func resetViewUI() {
         self.navigationController?.isNavigationBarHidden = true
         self.logInButton.backgroundColor = UIColor.rosyBrown
         self.logInButton.setTitle("Se connecter", for: .normal)

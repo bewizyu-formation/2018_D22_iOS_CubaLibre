@@ -102,7 +102,7 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     @IBAction func onValidateButtonPressed(_ sender: Any) {
-        let loader = UIViewController.displaySpinner(onView: self.view)
+        //let loader = UIViewController.displaySpinner(onView: self.view)
         UIView.animate(withDuration: -1, animations: {
             self.view.layoutIfNeeded()
         }) { (_) in
@@ -115,15 +115,14 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
                     APIClient.instance.updateContact(token: getToken()!, contact: contactToUpdate, onSuccess: { (success) in
                         self.updateContactOnCoreData(contactUpdated: contactToUpdate)
                         DispatchQueue.main.async {
-                            UIViewController.removeSpinner(spinner: loader)
                             self.navigationController?.popToRootViewController(animated: true)
                         }
                     }, onError: { (error) in
-                        UIViewController.removeSpinner(spinner: loader)
+                        //UIViewController.removeSpinner(spinner: loader)
                         self.createErrorMessageAlert(title: error)
                     })
                 } else {
-                    UIViewController.removeSpinner(spinner: loader)
+                    //UIViewController.removeSpinner(spinner: loader)
                     self.createErrorMessageAlert(title: "La saisie n'est pas correcte")
                 }
             }
@@ -161,19 +160,13 @@ class EditContactViewController: UIViewController, UIPickerViewDelegate, UIPicke
         alert.addAction(UIAlertAction(title: "Annuler", style: .default, handler: nil))
         
         let validateDelete = UIAlertAction(title: "Supprimer", style: .destructive) { (action:UIAlertAction) in
-            guard let contactId = self.contact.contactId else {
-                self.navigationController?.popToRootViewController(animated: true)
-                return
-            }
-            let loader = UIViewController.displaySpinner(onView: self.view)
-            APIClient.instance.deleteContact(token: getToken()!, contactId: contactId, onSuccess: { (success) in
-                UIViewController.removeSpinner(spinner: loader)
+            APIClient.instance.deleteContact(token: getToken()!, contactId: self.contact.contactId!, onSuccess: { (success) in
                 DispatchQueue.main.async {
                     self.deleteOnCoreData()
                     self.navigationController?.popToRootViewController(animated: true)
                 }
             }, onError: { (erreur) in
-                UIViewController.removeSpinner(spinner: loader)
+                //UIViewController.removeSpinner(spinner: loader)
                 self.createErrorMessageAlert(title: erreur)
             })
         }
