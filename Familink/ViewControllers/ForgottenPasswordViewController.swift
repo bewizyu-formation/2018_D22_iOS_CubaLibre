@@ -19,14 +19,14 @@ class ForgottenPasswordViewController: UIViewController {
     }
     
     @IBAction func onResetPasswordTap(_ sender: Any) {
-        let loader = UIViewController.displaySpinner(onView: self.view)
+        //let loader = UIViewController.displaySpinner(onView: self.view)
         
         UIView.animate(withDuration: -1, animations: {
             self.view.layoutIfNeeded()
         }) { (_) in
             APIClient.instance.forgotPassword(phone: self.phoneTextField.text ?? "", onSuccess: { (success) in
                 DispatchQueue.main.async {
-                    UIViewController.removeSpinner(spinner: loader)
+                    //UIViewController.removeSpinner(spinner: loader)
                     UIView.animate(withDuration: 2, animations: {
                         self.resetPasswordButton.backgroundColor = .green
                         UIView.animate(withDuration: 2, animations: {
@@ -36,7 +36,7 @@ class ForgottenPasswordViewController: UIViewController {
                 }
             }, onError: { (error) in
                 DispatchQueue.main.async {
-                    UIViewController.removeSpinner(spinner: loader)
+                    //UIViewController.removeSpinner(spinner: loader)
                     UIView.animate(withDuration: -1, animations: {
                         let alert = UIAlertController(title: error, message: "", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))

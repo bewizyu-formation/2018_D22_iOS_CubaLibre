@@ -69,8 +69,18 @@ class APIClient {
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
+        
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 200){
                     if let dataResponse = data {
                         if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [Any] {
@@ -124,8 +134,17 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 200){
                     onSuccess("Contact ajouté")
                 } else {
@@ -153,8 +172,17 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 204){
                     onSuccess("Contact modifié")
                 } else {
@@ -179,8 +207,17 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 204){
                     onSuccess("Contact supprimé")
                 } else {
@@ -249,8 +286,17 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 200){
                     onSuccess("User modifié")
                 } else {
@@ -275,8 +321,17 @@ class APIClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer: \(token)", forHTTPHeaderField: "Authorization")
         
+        var loader : UIView? = nil
+        
+        DispatchQueue.main.async {
+            loader = UIViewController.displaySpinner(onView: (UIApplication.shared.keyWindow?.rootViewController?.view)!)
+        }
+        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    UIViewController.removeSpinner(spinner: loader!)
+                }
                 if(httpResponse.statusCode == 200){
                     if let dataResponse = data {
                         if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [String: String] {
