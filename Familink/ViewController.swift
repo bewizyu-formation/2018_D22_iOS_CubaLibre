@@ -12,6 +12,7 @@ import CoreData
 extension Notification.Name {
     static let didUserConnect = Notification.Name("didUserConnect")
     static let didUserDisconnect = Notification.Name("didUserDisconnect")
+    static let onTokenExpired = Notification.Name("onTokenExpired")
 }
 
 class ViewController: UIViewController {
@@ -26,6 +27,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(onDidUserConnect(_:)), name: .didUserConnect, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidUserDisconnect(_:)), name: .didUserDisconnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onTokenExpired(_:)), name: .onTokenExpired, object: nil)
     }
     
     @objc func onDidUserConnect(_ notification:Notification) {
@@ -37,6 +39,16 @@ class ViewController: UIViewController {
         isConnected = false
         resetCoreData()
         toggleUINavigation()
+    }
+    
+    @objc func onTokenExpired(_ notification:Notification) {
+        print("teeeeeeeest")
+        isConnected = false
+        resetCoreData()
+        toggleUINavigation()
+        let alert = UIAlertController(title: "Session expirée", message: "Veuillez vous reconnecter", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
     
     func resetCoreData() {

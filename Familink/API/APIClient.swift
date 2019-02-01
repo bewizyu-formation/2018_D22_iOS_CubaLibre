@@ -100,7 +100,13 @@ class APIClient {
                         onError("Erreur inconnue")
                     }
                 } else {
-                    onError(self.getError(data: data))
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
                 }
             }
         }
@@ -124,11 +130,10 @@ class APIClient {
                     onSuccess("Contact ajouté")
                 } else {
                     if(httpResponse.statusCode == 401){
-                        print("expirée")
-                        NotificationCenter.default.post(name: .didUserDisconnect, object: nil)
-                        onError("La session a expirée")
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
                     } else {
-                        print(error)
                         onError(self.getError(data: data))
                     }
                 }
@@ -153,7 +158,13 @@ class APIClient {
                 if(httpResponse.statusCode == 204){
                     onSuccess("Contact modifié")
                 } else {
-                    onError(self.getError(data: data))
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
                 }
             }
         }
@@ -173,7 +184,13 @@ class APIClient {
                 if(httpResponse.statusCode == 204){
                     onSuccess("Contact supprimé")
                 } else {
-                    onError(self.getError(data: data))
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
                 }
             }
         }
@@ -237,7 +254,13 @@ class APIClient {
                 if(httpResponse.statusCode == 200){
                     onSuccess("User modifié")
                 } else {
-                    onError(self.getError(data: data))
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
                 }
             }
         }
@@ -271,7 +294,13 @@ class APIClient {
                         onError("Erreur inconnue")
                     }
                 } else {
-                    onError(self.getError(data: data))
+                    if(httpResponse.statusCode == 401){
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .onTokenExpired, object: nil)
+                        }
+                    } else {
+                        onError(self.getError(data: data))
+                    }
                 }
             }
         }

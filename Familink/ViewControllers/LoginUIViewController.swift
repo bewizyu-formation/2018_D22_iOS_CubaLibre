@@ -26,6 +26,7 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
         
         self.initViewUI()
         NotificationCenter.default.addObserver(self, selector: #selector(onDidUserDisconnect(_:)), name: .didUserDisconnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onTokenExpired(_:)), name: .onTokenExpired, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +85,14 @@ class LoginUIViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func onDidUserDisconnect(_ notification:Notification) {
+        resetViewUI()
+    }
+    
+    @objc func onTokenExpired(_ notification:Notification) {
+        resetViewUI()
+    }
+    
+    func resetViewUI() {
         self.navigationController?.isNavigationBarHidden = true
         self.logInButton.backgroundColor = UIColor.rosyBrown
         self.logInButton.setTitle("Se connecter", for: .normal)
