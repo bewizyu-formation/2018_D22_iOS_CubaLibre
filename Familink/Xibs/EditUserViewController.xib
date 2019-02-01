@@ -12,6 +12,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditUserViewController" customModule="Familink" customModuleProvider="target">
             <connections>
+                <outlet property="emailTextField" destination="1sx-Q5-HJ2" id="wbf-iS-0oK"/>
+                <outlet property="emailTitleLabel" destination="gDM-r0-fjx" id="Cky-XH-sGu"/>
+                <outlet property="errorMessageEmailLabel" destination="ynz-D5-hJF" id="83K-G6-E1K"/>
+                <outlet property="errorMessageFirstNameLabel" destination="Toq-yq-6ag" id="sO9-HV-eoD"/>
+                <outlet property="errorMessageLastNameLabel" destination="F0J-fe-3qo" id="qqG-Cu-Fuz"/>
+                <outlet property="errorMessageProfileLabel" destination="5qW-e6-HzW" id="Bvh-oE-tiS"/>
+                <outlet property="firstNameTextField" destination="Uoz-4H-Eju" id="a1E-oU-Uas"/>
+                <outlet property="firstNameTitleLabel" destination="1zd-lL-C5E" id="SIm-vH-hWT"/>
+                <outlet property="lastNameTextField" destination="OL4-Qt-fsg" id="dnA-1V-yST"/>
+                <outlet property="lastNameTitleLabel" destination="TE7-M7-vye" id="0Ul-RX-iJd"/>
+                <outlet property="pickerTextField" destination="vPB-zC-KeV" id="Glx-Ue-CKJ"/>
+                <outlet property="profileTextField" destination="vPB-zC-KeV" id="sBg-wY-G7u"/>
+                <outlet property="profileTitleLabel" destination="M3p-gX-XmY" id="usn-wS-wS6"/>
+                <outlet property="scrollView" destination="YtV-cG-zHo" id="yxW-ne-hcV"/>
+                <outlet property="validateButton" destination="RRg-zR-T8b" id="KG5-WR-1OJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,24 +35,103 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRg-zR-T8b">
-                    <rect key="frame" x="157" y="308" width="47" height="30"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YtV-cG-zHo">
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Valider"/>
-                    <connections>
-                        <action selector="onValidateButtonPressed:" destination="-1" eventType="touchUpInside" id="9Z5-GO-cux"/>
-                    </connections>
-                </button>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Editer un user" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OL4-Qt-fsg">
-                    <rect key="frame" x="178" y="211" width="111" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
+                </scrollView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ABb-xx-uMp">
+                    <rect key="frame" x="20" y="40" width="335" height="362"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TE7-M7-vye">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="XXXX" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OL4-Qt-fsg">
+                            <rect key="frame" x="0.0" y="28" width="335" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Champ vide ou invalide" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0J-fe-3qo">
+                            <rect key="frame" x="0.0" y="62" width="335" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prénom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zd-lL-C5E">
+                            <rect key="frame" x="0.0" y="83" width="335" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="XXXX" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uoz-4H-Eju">
+                            <rect key="frame" x="0.0" y="111" width="335" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Champ vide ou invalide" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Toq-yq-6ag">
+                            <rect key="frame" x="0.0" y="145" width="335" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3p-gX-XmY">
+                            <rect key="frame" x="0.0" y="166" width="335" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="XXXX" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vPB-zC-KeV">
+                            <rect key="frame" x="0.0" y="194" width="335" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Champ vide ou invalide" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qW-e6-HzW">
+                            <rect key="frame" x="0.0" y="228" width="335" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDM-r0-fjx">
+                            <rect key="frame" x="0.0" y="249" width="335" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="XXXX" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1sx-Q5-HJ2">
+                            <rect key="frame" x="0.0" y="277" width="335" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Champ vide ou invalide" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-D5-hJF">
+                            <rect key="frame" x="0.0" y="311" width="335" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRg-zR-T8b">
+                            <rect key="frame" x="0.0" y="332" width="335" height="30"/>
+                            <state key="normal" title="Modifier"/>
+                            <connections>
+                                <action selector="onValidateButtonPressed:" destination="-1" eventType="touchUpInside" id="9Z5-GO-cux"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ABb-xx-uMp" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="9hb-14-Ihp"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ABb-xx-uMp" secondAttribute="trailing" constant="20" id="Afs-YX-MT1"/>
+                <constraint firstItem="ABb-xx-uMp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="UvG-Lt-blv"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="132" y="149.77511244377811"/>
         </view>
     </objects>
 </document>
