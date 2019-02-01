@@ -20,30 +20,28 @@ class UserDetailsViewController: UIViewController {
     @IBOutlet weak var emailTitleLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
 
-    
     @IBOutlet weak var disconnectButton: UIButton!
-    
     
     var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initViewContent()
+        
         self.initViewUI()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"edit"), style: .plain, target: self, action: #selector(onEditButtonPressed))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        if let token = getToken() {
+            _ = APIClient.instance.getUser(token: token, onSuccess: self.onGetUserSuccess, onError: self.onGetUserError)
+        }
     }
     
     @IBAction func onEditButtonPressed(_ sender: Any) {
         let editUserController = EditUserViewController(nibName:nil, bundle: nil)
     self.navigationController?.pushViewController(editUserController, animated: true)
-    }
-    
-    func initViewContent() {
-        if let token = getToken() {
-        
-        _ = APIClient.instance.getUser(token: token, onSuccess: onGetUserSuccess, onError: onGetUserError)
-        }
     }
     
     func onGetUserSuccess (user: User) {
@@ -98,15 +96,5 @@ class UserDetailsViewController: UIViewController {
         }
     NotificationCenter.default.post(name: .didUserDisconnect, object: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

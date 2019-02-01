@@ -63,7 +63,7 @@ class EditUserViewController: UIViewController, UIPickerViewDataSource, UIPicker
     
     func initViewContent() {
         if let token = getToken() {
-            
+
             _ = APIClient.instance.getUser(token: token, onSuccess: onGetUserSuccess, onError: onGetUserError)
         }
     }
@@ -174,8 +174,29 @@ class EditUserViewController: UIViewController, UIPickerViewDataSource, UIPicker
         }
         
         if error == false {
-            navigationController?.popViewController(animated: true)
+            
+            if let context = self.getContext() {
+                let user = User(context: context)
+                guard let profile = profileTextField.text as? String else { return }
+                user.lastName = lastNameTextField.text
+                user.firstName = firstNameTextField.text
+                user.profile = profile.uppercased()
+                user.email = emailTextField.text
+                
+                if let token = getToken() {
+                    _ = APIClient.instance.updateUser(token: token, user: user, onSuccess: { (_) in
+                        DispatchQueue.main.async {
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }, onError: { (_) in
+                        let alert = UIAlertController(title: "Erreur", message: "Utilisateur non modifié", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    })
+                }
             }
+            
+        }
         
         UIView.animate(withDuration: -1, animations: {
             self.view.layoutIfNeeded()
@@ -244,5 +265,12 @@ class EditUserViewController: UIViewController, UIPickerViewDataSource, UIPicker
     @objc func onKeyboardDisappear(_ notification: NSNotification) {
         scrollView.contentInset = UIEdgeInsets.zero
         scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+    }
+    
+    func getContext() -> NSManagedObjectContext? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        return appDelegate.persistentContainer.viewContext
     }
 }
