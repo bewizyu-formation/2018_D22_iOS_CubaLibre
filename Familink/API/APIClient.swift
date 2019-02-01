@@ -375,7 +375,7 @@ class APIClient {
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
-                if(httpResponse.statusCode == 200){
+                if(httpResponse.statusCode == 204){
                     onSuccess("Vous recevrez votre nouveau mot de passe par mail")
                 } else {
                     onError(self.getError(data: data))
