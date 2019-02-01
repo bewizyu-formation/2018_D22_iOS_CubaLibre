@@ -17,6 +17,8 @@ class ContactDetailsViewController: UIViewController, MFMessageComposeViewContro
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailTitleLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var profilTitleLabel: UILabel!
+    @IBOutlet weak var profilLabel: UILabel!
     @IBOutlet weak var isFamilinkUserLabel: UILabel!
     @IBOutlet weak var isEmergencyUserLabel: UILabel!
     @IBOutlet weak var messageButton: UIButton!
@@ -28,6 +30,7 @@ class ContactDetailsViewController: UIViewController, MFMessageComposeViewContro
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initViewContent()
+        self.hideKeyboardGesture()
         self.initViewUI()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"edit"), style: .plain, target: self, action: #selector(onEditButtonPressed))
     }
@@ -137,6 +140,7 @@ class ContactDetailsViewController: UIViewController, MFMessageComposeViewContro
         lastNameLabel.text = contact.lastName
         phoneLabel.text = contact.phone
         emailLabel.text = contact.email
+        profilLabel.text = contact.profile
         isFamilinkUserLabel.isHidden = !contact.isFamilinkUser
         isEmergencyUserLabel.isHidden = !contact.isEmergencyUser
     }
@@ -154,6 +158,9 @@ class ContactDetailsViewController: UIViewController, MFMessageComposeViewContro
         
         emailTitleLabel.textColor = .oldRose
         emailLabel.textColor = .rosyBrown
+        
+        profilTitleLabel.textColor = .oldRose
+        profilLabel.textColor = .rosyBrown
         
         isFamilinkUserLabel.textColor = .rosyBrown
         isEmergencyUserLabel.textColor = .rosyBrown

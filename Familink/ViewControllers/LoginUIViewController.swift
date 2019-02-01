@@ -9,16 +9,20 @@
 import UIKit
 import CoreData
 
-class LoginUIViewController: UIViewController {
+class LoginUIViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var forgotPasswordButton: UIButton!
-    @IBOutlet weak var loginBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var loginTopConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.hideKeyboardGesture()
+        loginTextField.delegate = self
+        passwordTextField.delegate = self
         
         self.initViewUI()
         NotificationCenter.default.addObserver(self, selector: #selector(onDidUserDisconnect(_:)), name: .didUserDisconnect, object: nil)
@@ -52,7 +56,7 @@ class LoginUIViewController: UIViewController {
                     UIView.animate(withDuration: 2, animations: {
                         self.logInButton.setTitle("Connecté", for: .normal)
                         self.logInButton.backgroundColor = .green
-                        self.loginBottomConstraint.constant = 0
+                        self.loginTopConstraint.constant = 120
                         UIView.animate(withDuration: 2, animations: {
                             self.loginTextField.isHidden = true
                             self.passwordTextField.isHidden = true
@@ -80,17 +84,18 @@ class LoginUIViewController: UIViewController {
     }
 
     @objc func onDidUserDisconnect(_ notification:Notification) {
-        print("disconnet")
         self.navigationController?.isNavigationBarHidden = true
         self.logInButton.backgroundColor = UIColor.rosyBrown
         self.logInButton.setTitle("Se connecter", for: .normal)
-        self.loginBottomConstraint.constant = 120
+        self.loginTopConstraint.constant = 32
         
         self.loginTextField.isHidden = false
         self.passwordTextField.isHidden = false
         self.forgotPasswordButton.isHidden = false
         self.signUpButton.isHidden = false
         
+        loginTextField.text = ""
+        passwordTextField.text = ""
         self.navigationController?.popToRootViewController(animated: false)
     }
     
@@ -101,12 +106,10 @@ class LoginUIViewController: UIViewController {
         self.loginTextField.textColor = .rosyBrown
         self.loginTextField.layer.borderColor = UIColor.rosyBrown.cgColor
         self.loginTextField.layer.borderWidth = 1.0
-        //self.loginTextField.layer.cornerRadius = self.loginTextField.frame.height/2
         
         self.passwordTextField.textColor = .rosyBrown
         self.passwordTextField.layer.borderColor = UIColor.rosyBrown.cgColor
         self.passwordTextField.layer.borderWidth = 1.0
-        //self.passwordTextField.layer.cornerRadius = self.passwordTextField.frame.height/2
         
         self.logInButton.layer.cornerRadius = logInButton.frame.height/2
         self.logInButton.backgroundColor = .oldRose
@@ -142,14 +145,16 @@ class LoginUIViewController: UIViewController {
         return appDelegate.persistentContainer.viewContext
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let nextTag = textField.tag + 1
+        
+        if let nextResponder = view.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
     }
-    */
-
 }

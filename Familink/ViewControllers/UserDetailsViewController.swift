@@ -19,14 +19,12 @@ class UserDetailsViewController: UIViewController {
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var emailTitleLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
-
     @IBOutlet weak var disconnectButton: UIButton!
-    
+
     var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.initViewUI()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"edit"), style: .plain, target: self, action: #selector(onEditButtonPressed))
     }

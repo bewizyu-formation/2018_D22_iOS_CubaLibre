@@ -1,23 +1,21 @@
 //
-//  ForgottenPasswordViewController.swift
+//  ViewController.swift
 //  Familink
 //
-//  Created by formation 1 on 25/01/2019.
+//  Created by formation 1 on 30/01/2019.
 //  Copyright © 2019 CubaLibre. All rights reserved.
 //
 
 import UIKit
 
-class ForgottenPasswordViewController: UIViewController {
+class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.hideKeyboardGesture()
 
         // Do any additional setup after loading the view.
     }
-
+    
 
     /*
     // MARK: - Navigation

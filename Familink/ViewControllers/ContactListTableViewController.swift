@@ -14,104 +14,37 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
 
     var contacts = [Contact]()
     var fetchedResultController: NSFetchedResultsController<Contact>?
+    @IBOutlet var searchBar: UITableView!
 
     // initialize
 
+    func refresh() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+    func getContext() -> NSManagedObjectContext? {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return nil
+        }
+        return appDelegate.persistentContainer.viewContext
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: "ContactTableViewCell")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidUserConnect(_:)), name: .didUserConnect, object: nil)
+        self.hideKeyboardGesture()
+
+        self.tableView.register(UINib(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: "ContactTableViewCell")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.backgroundColor = UIColor.seaShell
-        getContactsFromCoreData()
     }
-    
-    
-    func getContactsFromCoreData() {
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true)]
-        
-        let resultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        
-        resultController.delegate = self
-        
-        try? resultController.performFetch()
-        
-        contacts = resultController.fetchedObjects ?? []
-        
-        self.fetchedResultController = resultController
-        
-        self.tableView.reloadData()
-    }
-    
-    // set contacts to CoreData
-    
-    func setContactsToCoreData(contactList : [Contact]) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let context = appDelegate.persistentContainer.viewContext
-        
-        for c in contactList {
-            context.insert(c)
-        }
-        
-        try? context.save()
-    }
-    
-    // refresh
-    
-    func refreshContactsFromCoreData() {
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "lastName", ascending: true)]
-        
-        let results = try? context.fetch(fetchRequest)
-        
-        contacts = results ?? []
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    @objc func onDidUserConnect(_ notification:Notification) {
-        let token = getToken() ?? ""
-        
-        _ = APIClient.instance.getContactList(token: token, onSuccess: self.setContactsToCoreData, onError: self.contactsFromAPIErrorDidFetch)
-    }
-    
-    func contactsFromAPIDidFetch(contactList : [Contact]) {
-        contacts = contactList
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    func contactsFromAPIErrorDidFetch(error: String) {
-        print("Error while fetching token")
-        print("Error is : " + error)
-    }
- 
-    // buttons
     
     @IBAction func onUserButtonPressed(_ sender: Any) {
         let userDetailsController = UserDetailsViewController(nibName:nil, bundle: nil)
@@ -126,7 +59,7 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
     @IBAction func onDisconnectButtonPress(_ sender: Any) {
         NotificationCenter.default.post(name: .didUserDisconnect, object: nil)
     }
-
+    
     // tableview
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -140,7 +73,7 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactTableViewCell", for: indexPath) as! ContactTableViewCell
         let contact = contacts[indexPath.row]
-        
+
         cell.contactLabelTitle.text = (contact.firstName ?? "") + " " + (contact.lastName ?? "")
         cell.contactLabelTitle.layoutMargins = UIEdgeInsets(top: 0, left: 75, bottom: 0, right: 0)
         cell.backgroundColor = UIColor.seaShell

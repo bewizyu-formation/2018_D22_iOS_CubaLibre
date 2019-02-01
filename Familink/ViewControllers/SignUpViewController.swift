@@ -38,6 +38,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     override func viewDidLoad() {
         super.viewDidLoad()
         let pickerView = UIPickerView()
+        self.hideKeyboardGesture()
         pickerView.delegate = self
         pickerTextField.inputView = pickerView
         
@@ -131,8 +132,6 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                 user.firstName = firstnameTextField.text
                 user.email = mailTextField.text
                 
-                print(profile)
-                
                 APIClient.instance.addUser(user: user, password: password, onSuccess: onAddUserSuccess, onError: onAddUserError)
             }
         }
@@ -150,7 +149,8 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
             
             _ = APIClient.instance.getToken(login: user.phone ?? "", password: password, onSuccess: { (token : String) in
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .didUserConnect, object: nil)
+                    self.navigationController?.popToRootViewController(animated: true)
+                    //NotificationCenter.default.post(name: .didUserConnect, object: nil)
                 }
             }, onError: { (errorMessage : String) in
                 DispatchQueue.main.async {

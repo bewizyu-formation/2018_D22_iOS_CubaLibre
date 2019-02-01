@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var firstNameTextInput: UITextField!
@@ -33,10 +33,29 @@ class AddContactViewController: UIViewController, UIPickerViewDelegate, UIPicker
         
         self.profilePicker.delegate = self
         self.profilePicker.dataSource = self
+        self.hideKeyboardGesture()
+        
+        firstNameTextInput.delegate = self
+        lastNameTextInput.delegate = self
+        phoneTextInput.delegate = self
+        emailTextField.delegate = self
         
         profilePickerData = ["Famille", "Senior", "Médecin"]
         
         self.initViewUI()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let nextTag = textField.tag + 1
+        
+        if let nextResponder = view.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        
+        return true
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

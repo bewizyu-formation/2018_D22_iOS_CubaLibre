@@ -78,18 +78,20 @@ class APIClient {
                             for object in jsonResponse {
                                 let objectDictionary = object as! [String:Any]
                                 
-                                let c = Contact(context: self.getContext()!)
-                                c.contactId = objectDictionary[self.CONTACT_ID] as? String
-                                c.firstName = objectDictionary[self.FIRSTNAME] as? String
-                                c.lastName = objectDictionary[self.LASTNAME] as? String ?? ""
-                                c.phone = objectDictionary[self.PHONE] as? String
-                                c.email = objectDictionary[self.EMAIL] as? String
-                                c.gravatar = objectDictionary[self.GRAVATAR] as? String ?? ""
-                                c.profile = objectDictionary[self.PROFILE] as? String ?? ""
-                                c.isFamilinkUser = objectDictionary[self.IS_FAMILINK_USER] as! Bool ?? false
-                                c.isEmergencyUser = objectDictionary[self.IS_EMERGENCY_USER] as! Bool ?? false
-                                
-                                contactsToReturn.append(c)
+                                DispatchQueue.main.sync {
+                                    let c = Contact(context: self.getContext()!)
+                                    c.contactId = objectDictionary[self.CONTACT_ID] as? String
+                                    c.firstName = objectDictionary[self.FIRSTNAME] as? String
+                                    c.lastName = objectDictionary[self.LASTNAME] as? String ?? ""
+                                    c.phone = objectDictionary[self.PHONE] as? String
+                                    c.email = objectDictionary[self.EMAIL] as? String
+                                    c.gravatar = objectDictionary[self.GRAVATAR] as? String ?? ""
+                                    c.profile = objectDictionary[self.PROFILE] as? String ?? ""
+                                    c.isFamilinkUser = objectDictionary[self.IS_FAMILINK_USER] as! Bool ?? false
+                                    c.isEmergencyUser = objectDictionary[self.IS_EMERGENCY_USER] as! Bool ?? false
+                                    
+                                    contactsToReturn.append(c)
+                                }
                             }
                             onSuccess(contactsToReturn)
                         }
@@ -187,13 +189,15 @@ class APIClient {
                     if let dataResponse = data {
                         if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [String: String]
                             {
-                                let user = User(context: self.getContext()!)
-                                user.phone = jsonResponse[self.PHONE] ?? ""
-                                user.firstName = jsonResponse[self.FIRSTNAME] ?? ""
-                                user.lastName = jsonResponse[self.LASTNAME] ?? ""
-                                user.email = jsonResponse[self.EMAIL] ?? ""
-                                user.profile = jsonResponse[self.PROFILE] ?? ""
-                                onSuccess(user, password)
+                                DispatchQueue.main.sync {
+                                    let user = User(context: self.getContext()!)
+                                    user.phone = jsonResponse[self.PHONE] ?? ""
+                                    user.firstName = jsonResponse[self.FIRSTNAME] ?? ""
+                                    user.lastName = jsonResponse[self.LASTNAME] ?? ""
+                                    user.email = jsonResponse[self.EMAIL] ?? ""
+                                    user.profile = jsonResponse[self.PROFILE] ?? ""
+                                    onSuccess(user, password)
+                                }
                         }
                     }
                 } else {
@@ -245,13 +249,15 @@ class APIClient {
                 if(httpResponse.statusCode == 200){
                     if let dataResponse = data {
                         if let jsonResponse = try? JSONSerialization.jsonObject(with: dataResponse, options: [])  as! [String: String] {
-                            let user = User(context: self.getContext()!)
-                            user.phone = jsonResponse[self.PHONE] ?? ""
-                            user.firstName = jsonResponse[self.FIRSTNAME] ?? ""
-                            user.lastName = jsonResponse[self.LASTNAME] ?? ""
-                            user.email = jsonResponse[self.EMAIL] ?? ""
-                            user.profile = jsonResponse[self.PROFILE] ?? ""
-                            onSuccess(user)
+                            DispatchQueue.main.sync {
+                                let user = User(context: self.getContext()!)
+                                user.phone = jsonResponse[self.PHONE] ?? ""
+                                user.firstName = jsonResponse[self.FIRSTNAME] ?? ""
+                                user.lastName = jsonResponse[self.LASTNAME] ?? ""
+                                user.email = jsonResponse[self.EMAIL] ?? ""
+                                user.profile = jsonResponse[self.PROFILE] ?? ""
+                                onSuccess(user)
+                            }
                         }
                     } else {
                         onError("Erreur inconnue")

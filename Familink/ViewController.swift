@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 extension Notification.Name {
     static let didUserConnect = Notification.Name("didUserConnect")
@@ -34,9 +35,55 @@ class ViewController: UIViewController {
     
     @objc func onDidUserDisconnect(_ notification:Notification) {
         isConnected = false
+        resetCoreData()
         toggleUINavigation()
     }
     
+    func resetCoreData() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
+        
+        let results = try? context.fetch(fetchRequest)
+        
+        guard let contactList = results else {
+            return
+        }
+        
+        for contact in contactList{
+            context.delete(contact)
+        }
+        
+        let userFetchRequest = NSFetchRequest<User>(entityName: "User")
+        
+        let userResults = try? context.fetch(userFetchRequest)
+        
+        guard let users = userResults else {
+            return
+        }
+        
+        for user in users {
+            context.delete(user)
+        }
+        
+        let tokenFetchRequest = NSFetchRequest<Token>(entityName: "Token")
+        
+        let tokenResults = try? context.fetch(tokenFetchRequest)
+        
+        guard let tokens = tokenResults else {
+            return
+        }
+        
+        for token in tokens {
+            context.delete(token)
+        }
+        
+        try? context.save()
+    }
     
     func toggleUINavigation() {
         if (isConnected)
