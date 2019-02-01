@@ -39,7 +39,7 @@ class ContactListTableViewController: UITableViewController, NSFetchedResultsCon
 
         self.tableView.register(UINib(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: "ContactTableViewCell")
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

@@ -85,8 +85,10 @@ class ContactListViewController: UIViewController, NSFetchedResultsControllerDel
     }
     
     func refresh() {
-        self.tableView.contacts = self.filteredContacts
-        self.tableView.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.contacts = self.filteredContacts
+            self.tableView.tableView.reloadData()
+        }
     }
     
     // initialize
@@ -104,15 +106,46 @@ class ContactListViewController: UIViewController, NSFetchedResultsControllerDel
         NotificationCenter.default.addObserver(self, selector: #selector(onDidUserConnect(_:)), name: .didUserConnect, object: nil)
         
         searchBar.delegate = self
+        self.setupFetchedResultController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.tableView.backgroundColor = UIColor.seaShell
-        getContactsFromCoreData()
         searchBar.backgroundColor = .seaShell
-
+        self.refresh()
+    }
+    
+    func setupFetchedResultController(){
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Contact>(entityName: "Contact")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true)]
+        
+        let resultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        resultController.delegate = self
+        
+        try? resultController.performFetch()
+        
+        contacts = resultController.fetchedObjects ?? []
+        filterContacts()
+        
+        self.fetchedResultController = resultController
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        if let newContacts = controller.fetchedObjects as? [Contact] {
+            self.contacts = newContacts
+            self.filterContacts()
+            self.refresh()
+        }
     }
     
     // Contacts to & from coredata
